@@ -35,22 +35,28 @@ function addInput(divName){
           counter++;
      }
 }
-var counterAnswer = 0;
+
+var firstQuest = true
+var answerBool  = false;
 var counterQuestion = 0;
-var counterRadioButton = 0;
-var counterCheckBox = 0;
-var counterTextArea = 0;
-function addAllInputs(divName, inputType, question){
+
+function addAllInputs(divName, inputType, questionBool){
      var newdiv = document.createElement('div');
 
 
-     if (question == true){
-          newdiv.innerHTML = "<br>" + (counterQuestion + 1) + ".)" + "<br><input type='text' name='myInputs[]'>";
-          counterQuestion++;
-     }
-
-     if(counterQuestion>0){
-          answer.disabled=false;
+     if (questionBool == true){
+          
+          // Ensures that no question is added without an answer option
+          if(firstQuest == true || answerBool == true){
+               newdiv.innerHTML = "<br>" + (counterQuestion + 1) + ".)" + "<br><input type='text' name='myInputs[]'>";
+               counterQuestion++;
+               firstQuest = false;
+               answerBool = false;
+          }
+          // Sends an alert if a question is tried to be made and doesn't have an answer option
+          else {
+               alert("please add a way to answer the question");
+          }
      }
 
      else{
@@ -68,7 +74,15 @@ function addAllInputs(divName, inputType, question){
                  newdiv.innerHTML = "<br>" + "<textarea name='myTextAreas[]'>type here...</textarea>";
                     break;
                }
+               answerBool = true;
           }
+
+     // Disables the answer button unless there has been a question
+
+     if(questionBool == true){
+          answer.disabled=false;
+     }
+
      document.getElementById(divName).appendChild(newdiv);
 }
 

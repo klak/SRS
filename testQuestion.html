@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<body>
+<form name="myForm" method="POST">
+     <div id="dynamicInputs">
+          Add Questions
+     </div>
+     <p>  
+          <select name="inputSelect">
+               <option value="text">text field</option>
+               <option value="radio">radio button</option>
+               <option value="checkbox">checkbox</option>
+               <option value="textarea">textarea</option>
+          </select>
+          <br>
+          <br>
+          <input type="button" id="answer" value="Response Type" onclick="addAllInputs('dynamicInputs', document.myForm.inputSelect.value, false);" disabled="disabled">
+          <input type="button" id="question" value="New Question" onclick="addAllInputs('dynamicInputs', 'text', true);">
+          
+          <br>
+     </p>
+</form>
+
+<script>
+var counter = 1; // adds the number to the questions
+var limit = 3; // controls the number of questions
+function addInput(divName){
+     if (counter == limit)  {
+          alert("You have reached the limit of adding " + counter + " inputs");
+     }
+     else {
+          var newdiv = document.createElement('div');
+          newdiv.innerHTML = "<br>"+"Question " + (counter + 1) + " <br><input type='text' name='myInputs[]'>";
+          document.getElementById(divName).appendChild(newdiv);
+          counter++;
+     }
+}
+var counterAnswer = 0;
+var counterQuestion = 0;
+var counterRadioButton = 0;
+var counterCheckBox = 0;
+var counterTextArea = 0;
+function addAllInputs(divName, inputType, question){
+     var newdiv = document.createElement('div');
+
+
+     if (question == true){
+          newdiv.innerHTML = "<br>" + (counterQuestion + 1) + ".)" + "<br><input type='text' name='myInputs[]'>";
+          counterQuestion++;
+     }
+
+     if(counterQuestion>0){
+          answer.disabled=false;
+     }
+
+     else{
+          switch(inputType) {
+               case 'text':
+                    newdiv.innerHTML = "<br>" + "<input type='text' name='myInputs[]'>";
+                    break;
+               case 'radio':
+                    newdiv.innerHTML = "<br>" + "<input type='radio' name='myRadioButtons[]'>" + "<input text='text'>";
+                    break;
+               case 'checkbox':
+                    newdiv.innerHTML = "<br>" + "<input type='checkbox' name='myCheckBoxes[]'>" + "<input text='text'>";
+                    break;
+               case 'textarea':
+                 newdiv.innerHTML = "<br>" + "<textarea name='myTextAreas[]'>type here...</textarea>";
+                    break;
+               }
+          }
+     document.getElementById(divName).appendChild(newdiv);
+}
+
+
+</script>
+</body>
+</html>

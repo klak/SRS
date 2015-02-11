@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.klak.SRS" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>SRS</name>
+    <description>
+        Implementation of Dr. Scofields Cordova App
+    </description>
+    <author email="jdvaughn1@crimson.ua.edu" href="https://github.com/jdvaughn22">
+        David Vaughn
+    </author>
+    <author email="klgaluska@crimson.ua.edu" href="https://github.com/KellyGaluska">
+        Kelly Galuska
+    </author>
+    <author email="bmlaird@crimson.ua.edu" href="https://github.com/blaird1994">
+        Brandon Laird
+    </author>
+    <author email="dmklein@crimson.ua.edu" href="https://github.com/dmarklein">
+        Daniel Klein
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+</widget>

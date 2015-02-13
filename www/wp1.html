@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+    .grid { margin:1em auto; border-collapse:collapse }
+    .grid td {
+        cursor:pointer;
+        width:30px; height:30px;
+        border:1px solid #ccc;
+        text-align:center;
+        font-family:sans-serif; font-size:13px
+    }
+    .grid td.clicked1 {
+        
+        background-image: url("img/empChair.png");
+        background-size: 33px 33px;
+    }
+
+    .grid td.clicked2{
+      background-image: url("img/occChair.png");
+      background-size: 33px 33px;
+
+    }
+
+    .grid td.clicked3{
+      background-color: none;
+    }
+
+    img{
+        width:33px; height:33px;
+    }
+
+    </style>
+  </head>
+
+  <body>
+
+    <h3>Array using javascript parameters</h3>
+    <form>
+      Height:<br>
+      <input type = "number" id="heightInput">
+      <br>
+      <br>
+      Width:<br>
+      <input type = "number" id="widthInput">
+    </form>
+    <p>Click the button to get an array of the specified size</p>
+    <button onclick="grid()">Try it</button>
+
+  <script>
+
+  function clickableGrid( rows, cols, callback ){
+      var i=0;
+      var grid = document.createElement('table');
+      grid.className = 'grid';
+
+      //creates the rows
+      for (var r=0;r<rows;++r){
+          var tr = grid.appendChild(document.createElement('tr'));
+          
+          //creates the columns
+          for (var c=0;c<cols;++c){
+              var cell = tr.appendChild(document.createElement('td'));
+              //adds numbers to the cells
+              //cell.innerHTML = ++i;
+              cell.id = ++i;
+
+              cell.addEventListener('click',(function(el,r,c,i){
+                  return function(){
+                      callback(el,r,c,i);
+                  }
+              })
+
+              (cell,r,c,i),false);
+          }
+      }
+      return grid;
+  }
+
+
+  function grid() {
+
+    var counter = 0;
+    // Grabs the number from the form in the height box
+    var height = document.getElementById("heightInput").value;
+
+      //Grabs the number from the form in the width box
+    var width = document.getElementById("widthInput").value;
+
+    var lastClicked;
+
+    var grid = clickableGrid(height,width,function(el,row,col,i){
+              console.log("You clicked on element:",el);
+              console.log("You clicked on row:",row);
+              console.log("You clicked on col:",col);
+              console.log("You clicked on item #:",i);
+              
+
+              // Uses the class name to determine if the box has been clicked
+              
+              if(el.className == ''){
+                el.className = 'clicked1';
+              }
+              else if(el.className == 'clicked1'){
+                el.className = 'clicked2';
+              }
+              else if(el.className == 'clicked2'){
+                el.className = '';
+              }
+
+          });
+
+    //prints the array
+      var testGrid = document.body.appendChild(grid);
+      localStorage.setItem('gridTest', testGrid);
+
+
+  }
+
+  </script>
+  <a href="wp2.html"><button>Test</button></a>
+  </body>
+
+
+</html>

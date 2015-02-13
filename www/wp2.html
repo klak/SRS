@@ -37,12 +37,76 @@
 
     <h3>Array using javascript parameters</h3>
     <div id="result"></div>
-    <button onclick="test()">Try it</button>
+    <button onclick="grid()">Try it</button>
 
   <script>
-    function test(){
-      var test = localStorage.getItem("gridTest");
-      console.log(test);
-      document.body.append(test);
-    }
+      function clickableGrid( rows, cols, callback){
+      var i=0;
+      var empChairArray = localStorage.getItem('empChairArray');
+      var occChairArray = localStorage.getItem('occChairArray')
+      var grid = document.createElement('table');
+      grid.className = 'grid';
+
+      //creates the rows
+      for (var r=0;r<rows;++r){
+          var tr = grid.appendChild(document.createElement('tr'));
+          
+          //creates the columns
+          for (var c=0;c<cols;++c){
+              var cell = tr.appendChild(document.createElement('td'));
+              //adds numbers to the cells
+              //cell.innerHTML = ++i;
+              cell.id = ++i;
+              if(cell.id == empChairArray[0]){
+                cell.className = 'clicked1';
+                empChairArray.shift();
+              }
+
+              else if(cell.id == occChairArray[0]){
+                cell.className = 'clicked2';
+                occChairArray.shift();
+              }
+
+
+              cell.addEventListener('click',(function(el,r,c,i){
+                  return function(){
+                      callback(el,r,c,i);
+                  }
+              })
+
+              (cell,r,c,i),false);
+          }
+      }
+      return grid;
+  }
+
+
+  function grid() {
+
+    var counter = 0;
+    // Grabs the number from the form in the height box
+    var height = localStorage.getItem('gridHeight');
+
+    //Grabs the number from the form in the width box
+    var width = localStorage.getItem('gridWidth');
+
+    var lastClicked;
+
+    var grid = clickableGrid(height,width,function(el,row,col,i){
+
+              console.log("You clicked on element:",el);
+              console.log("You clicked on row:",row);
+              console.log("You clicked on col:",col);
+              console.log("You clicked on item #:",i);
+              
+
+          });
+
+    //prints the array
+      var testGrid = document.body.appendChild(grid);
+
+
+  }
+
+
   </script>

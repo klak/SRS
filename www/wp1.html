@@ -54,6 +54,7 @@
       var i=0;
       var grid = document.createElement('table');
       grid.className = 'grid';
+      grid.id = 'table';
 
       //creates the rows
       for (var r=0;r<rows;++r){
@@ -85,7 +86,7 @@
     // Grabs the number from the form in the height box
     var height = document.getElementById("heightInput").value;
 
-      //Grabs the number from the form in the width box
+    //Grabs the number from the form in the width box
     var width = document.getElementById("widthInput").value;
 
     var lastClicked;
@@ -108,18 +109,39 @@
               else if(el.className == 'clicked2'){
                 el.className = '';
               }
-
           });
 
     //prints the array
       var testGrid = document.body.appendChild(grid);
-      localStorage.setItem('gridTest', testGrid);
-
+      localStorage.setItem('gridHeight', height);
+      localStorage.setItem('gridWidth', width)
 
   }
 
+  function save(i){
+    
+    var gridArray1 = new Array();
+    var gridArray2 = new Array();
+    var table = document.getElementById('table');
+    
+    for (var r = 0, n = table.rows.length; r < n; r++) {
+            for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
+                console.log(table.rows[r].cells[c].className);
+                if(table.rows[r].cells[c].className == 'clicked1'){
+                  gridArray1.push(table.rows[r].cells[c].id);
+
+                }
+                else if(table.rows[r].cells[c].className == 'clicked2'){
+                  gridArray2.push(table.rows[r].cells[c].id);
+                }
+            }
+        } 
+      localStorage.setItem('empChairArray', gridArray1);
+      localStorage.setItem('occChairArray', gridArray2)
+  }
+
   </script>
-  <a href="wp2.html"><button>Test</button></a>
+  <a href="wp2.html"><button onclick="save()">Save</button></a> -->
   </body>
 
 

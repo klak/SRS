@@ -33,17 +33,13 @@
     </style>
   </head>
 
-  <body>
-
-    <h3>Array using javascript parameters</h3>
-    <div id="result"></div>
-    <button onclick="grid()">Try it</button>
+  <body onload="grid()">
 
   <script>
       function clickableGrid( rows, cols, callback){
       var i=0;
-      var empChairArray = localStorage.getItem('empChairArray');
-      var occChairArray = localStorage.getItem('occChairArray')
+      var empChairArray = localStorage.getItem('empChairArray').split(",");
+      var occChairArray = localStorage.getItem('occChairArray').split(",");
       var grid = document.createElement('table');
       grid.className = 'grid';
 
@@ -71,7 +67,7 @@
               cell.addEventListener('click',(function(el,r,c,i){
                   return function(){
                       callback(el,r,c,i);
-                  }
+                  };
               })
 
               (cell,r,c,i),false);
@@ -94,11 +90,6 @@
 
     var grid = clickableGrid(height,width,function(el,row,col,i){
 
-              console.log("You clicked on element:",el);
-              console.log("You clicked on row:",row);
-              console.log("You clicked on col:",col);
-              console.log("You clicked on item #:",i);
-              
 
           });
 

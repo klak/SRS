@@ -70,7 +70,7 @@
               cell.addEventListener('click',(function(el,r,c,i){
                   return function(){
                       callback(el,r,c,i);
-                  }
+                  };
               })
 
               (cell,r,c,i),false);
@@ -114,7 +114,7 @@
     //prints the array
       var testGrid = document.body.appendChild(grid);
       localStorage.setItem('gridHeight', height);
-      localStorage.setItem('gridWidth', width)
+      localStorage.setItem('gridWidth', width);
 
   }
 
@@ -136,12 +136,16 @@
                 }
             }
         } 
-      localStorage.setItem('empChairArray', gridArray1);
-      localStorage.setItem('occChairArray', gridArray2)
+      var toLocal1 = gridArray1.toString();
+      var toLocal2 = gridArray2.toString(); 
+      console.log(toLocal1);
+      console.log(toLocal2);
+      localStorage.setItem('empChairArray', toLocal1);
+      localStorage.setItem('occChairArray', toLocal2);
   }
 
   </script>
-  <a href="wp2.html"><button onclick="save()">Save</button></a> -->
+  <a href="wp2.html"><button onclick="save()">Save</button></a>
   </body>
 
 

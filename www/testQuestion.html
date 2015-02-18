@@ -1,7 +1,90 @@
 <!DOCTYPE html>
 <html>
+     <head>
+          <link href="css/sandstone.css" rel="stylesheet">
+          <link href="css/admin.css" rel="stylesheet">
+     
+    <link href="css/sandstone.css" rel="stylesheet">
+     <style>
+    .grid { margin:1em auto; border-collapse:collapse }
+    .grid td {
+        cursor:pointer;
+        width:30px; height:30px;
+        border:1px solid #ccc;
+        text-align:center;
+        font-family:sans-serif; font-size:13px
+    }
+    .grid td.clicked1 {
+        
+        background-image: url("img/empChair.png");
+        background-size: 33px 33px;
+    }
+    .grid td.clicked2{
+      background-image: url("img/occChair.png");
+      background-size: 33px 33px;
+    }
+    .grid td.clicked3{
+      background-color: none;
+    }
+    img{
+        width:33px; height:33px;
+    }
+     </style>
+     </head>
+
 <body>
-<link href="css/holo.css" rel="stylesheet">
+     <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container-fluid">
+               <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                         <span class="sr-only">Toggle navigation</span>
+                         <span class="icon-bar"></span>
+                         <span class="icon-bar"></span>
+                         <span class="icon-bar"></span>
+                    </button>
+               <a class="navbar-brand" href="#">SRS</a>
+               </div>
+               <div id="navbar" class="navbar-collapse collapse">
+               <ul class="nav navbar-nav navbar-right">
+               <li><a href="#menu-toggle" id="menu-toggle">Dashboard</a></li>
+               <li role="presentation" class="dropdown">
+               <a id="drop5" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                       Profile
+                       <span class="caret"></span>
+                       </a>
+                       <ul id="menu2" class="dropdown-menu" role="menu" aria-labelledby="drop5">
+                         <li role="presentation"><a role="menuitem" tabindex="-1" href="home.html">Logout</a></li>
+                       </ul>
+                     </li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Help</a></li>
+               </ul>
+               </div>
+          </div>
+     </nav>
+
+     <div id="wrapper" class="">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+          <ul class="sidebar-nav">
+               <li class="sidebar-brand">
+                    <a href="#">
+                    Admin Dashboard
+               </a>
+           </li>
+           <li>
+                    <a href="#">Services</a>
+           </li>
+               <li>
+                    <a href="#">Contact</a>
+           </li>
+        </ul>
+     </div>
+
+
+
+<div id="page-content-wrapper">
+     <h1>New Survey</h1>
 <form name="myForm" method="POST">
      <div id="dynamicInputs">
           Add Questions
@@ -21,6 +104,7 @@
           <br>
      </p>
 </form>
+</div>
 
 <script>
 var counter = 1; // adds the number to the questions

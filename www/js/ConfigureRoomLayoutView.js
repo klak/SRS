@@ -1,4 +1,4 @@
-var AdminHomeView = function () {
+var ConfigureRoomLayoutView = function () {
 
 	this.initialize = function() {
 		// div wrapper for view, used to attach events
@@ -31,4 +31,7 @@ var AdminHomeView = function () {
     };*/
 
     this.initialize();
+
+    // TODO: stick javascript that configure room needs in here somewhere.
+    // TODO: build some sort of structure around local storage???
 }

@@ -5,6 +5,8 @@
     
     HomeView.prototype.template = Handlebars.compile($("#home-template").html());
     AdminHomeView.prototype.template = Handlebars.compile($("#admin-home-template").html());
+    ConfigureRoomLayoutView.prototype.template = Handlebars.compile($("#configure-room-template").html());
+    ViewRoomView.prototype.template = Handlebars.compile($("#view-room-template").html());
 
     /*datastorage.initialize().done(function () {
         //console.log("Service initialized");
@@ -28,13 +30,20 @@
         $('body').html(new AdminHomeView().render().$el);
     });
 
+    router.addRoute('configureRoom', function (){
+        $('body').html(new ConfigureRoomLayoutView().render().$el);
+    }); 
+
+    router.addRoute('viewRoom', function (){
+        $('body').html(new ViewRoomView().render().$el);
+    }); 
+
     router.start();
 
     /* --------------------------------- Event Registration -------------------------------- */
 
 
     /* ---------------------------------- Local Functions ---------------------------------- */
-
 
 
 

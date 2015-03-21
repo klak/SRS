@@ -1,6 +1,8 @@
-var AdminHomeView = function () {
+var ViewRoomView = function () {
 
 	this.initialize = function() {
+        // todo: must call grid() first... (corresponds to "onload=grid()" in original code)
+
 		// div wrapper for view, used to attach events
 		this.$el = $('<div/>');
 		//this.$el.on('keyup', '.search-key', this.findByName);
@@ -31,4 +33,7 @@ var AdminHomeView = function () {
     };*/
 
     this.initialize();
+
+    // TODO: stick javascript that configure room needs in here somewhere.
+    // TODO: build some sort of structure around local storage???
 }

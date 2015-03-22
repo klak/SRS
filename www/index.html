@@ -203,9 +203,8 @@
                         </form>
                         
                         <p>Click the button to get an array of the specified size</p>
-                        <button onclick="grid()">Try it</button>
-                        <a href="wp2.html"><button onclick="save()">Save</button></a> 
-                        <!-- TODO: this should actually point to #viewRoom not wp2.html -->
+                        <button id="generate-grid">Really Try It</button>
+                        <a href="#viewRoom"><button id="save-grid">Save</button></a> 
                       </div>
                     <div class="col-lg-12" id="test">
                         <!-- grid goes here -->
@@ -238,7 +237,7 @@
                         Profile
                         <span class="caret"></span></a>
                         <ul id="menu2" class="dropdown-menu" role="menu" aria-labelledby="drop5">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="home.html">Logout</a></li> <!-- TODO: fix this href -- it should go to index.html#home instead. -->
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#home">Logout</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Settings</a></li>

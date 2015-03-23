@@ -15,7 +15,7 @@ var ConfigureRoomLayoutView = function () {
         
         var lastClicked;
 
-        var grid = clickableGrid(height, width,
+        var grid = createClickableGrid(height, width,
                     function(el, row, col, i)
                     {
                         console.log("You clicked on element:", el);
@@ -63,7 +63,7 @@ var ConfigureRoomLayoutView = function () {
         this.$el.on('click', '#generate-grid', this.grid);
 
         // button for generating grid from coords
-        this.$el.on('click', '#save-grid', this.save);
+        this.$el.on('click', '#save-grid', save);
 
 		this.render();
 	};
@@ -82,12 +82,19 @@ var ConfigureRoomLayoutView = function () {
     // TODO: build some sort of structure around local storage???
 }
 
-var clickableGrid = function(rows, cols, callback) 
+var createClickableGrid = function(rows, cols, callback) 
 {
+    console.log("in clickableGrid...");
+
     var i = 0;
     var grid = document.createElement('table');
+    
+    //grid.id = 'grid-table';
+    console.log("setting id of grid table...");
+
+    grid.setAttribute("id", "grid-table");
     grid.className = 'grid';
-    grid.id = 'table';
+    
 
     //creates the rows
     for (var r = 0; r < rows; ++r)
@@ -116,11 +123,12 @@ var clickableGrid = function(rows, cols, callback)
     return grid;
 };
 
-function save()
+var save = function()
 {
     var gridArray1 = new Array();
     var gridArray2 = new Array();
-    var table = document.getElementById('table');
+    // var table = document.getElementById('table');
+    var table = document.getElementById('grid-table');
     
     for (var r = 0, n = table.rows.length; r < n; r++) 
     {
@@ -137,8 +145,10 @@ function save()
     } 
     var toLocal1 = gridArray1.toString();
     var toLocal2 = gridArray2.toString(); 
-    console.log(toLocal1);
-    console.log(toLocal2);
+    console.log("saving to empChairArray: ", toLocal1);
+    console.log("saving to occChairArray: ", toLocal2);
+
+
     localStorage.setItem('empChairArray', toLocal1);
     localStorage.setItem('occChairArray', toLocal2);
 }

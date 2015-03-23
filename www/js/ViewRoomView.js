@@ -48,7 +48,7 @@ var ViewRoomView = function () {
 
         var lastClicked;
 
-        var grid = clickableGrid(height, width,
+        var grid = loadClickableGrid(height, width,
                     function(el,row,col,i){
 
 
@@ -67,7 +67,7 @@ var ViewRoomView = function () {
     // TODO: build some sort of structure around local storage???
 }
 
-      var clickableGrid = function( rows, cols, callback) {
+      var loadClickableGrid = function( rows, cols, callback) {
           var i=0;
           console.log("empty chairs are: ", localStorage.getItem('empChairArray'));
           console.log("empty chairs are: ", localStorage.getItem('occChairArray'));

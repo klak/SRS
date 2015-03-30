@@ -8,6 +8,8 @@
     ConfigureRoomLayoutView.prototype.template = Handlebars.compile($("#configure-room-template").html());
     ConfigureSurveyView.prototype.template = Handlebars.compile($("#configure-survey-template").html());
     ViewRoomView.prototype.template = Handlebars.compile($("#view-room-template").html());
+    TakeSurveyView.prototype.template = Handlebars.compile($('#take-survey-template').html());
+    SelectChairView.prototype.template = Handlebars.compile($("#select-chair-template").html());
 
     /*datastorage.initialize().done(function () {
         //console.log("Service initialized");
@@ -19,19 +21,19 @@
         
     });*/
 
-    router.addRoute('', function (){
+    router.addRoute('', function(){
         $('body').html(new HomeView().render().$el);
     });
 
-    router.addRoute('home', function (){
+    router.addRoute('home', function(){
         $('body').html(new HomeView().render().$el);
     });
 
-    router.addRoute('adminHome', function (){
+    router.addRoute('adminHome', function(){
         $('body').html(new AdminHomeView().render().$el);
     });
 
-    router.addRoute('configureRoom', function (){
+    router.addRoute('configureRoom', function(){
         $('body').html(new ConfigureRoomLayoutView().render().$el);
     }); 
 
@@ -39,9 +41,17 @@
         $('body').html(new ConfigureSurveyView().render().$el);
     });
 
-    router.addRoute('viewRoom', function (){
+    router.addRoute('viewRoom', function() {
         $('body').html(new ViewRoomView().render().$el);
-    }); 
+    });
+
+    router.addRoute('takeSurvey', function() {
+        $('body').html(new TakeSurveyView().render().$el);
+    });
+
+    router.addRoute('selectChair', function() {
+        $('body').html(new SelectChairView().render().$el);
+    });
 
 
 

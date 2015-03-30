@@ -44,7 +44,7 @@
                 dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan.
                 Aliquam in felis sit amet augue.
                 <hr>
-                <a href="#"><button class="btn btn-primary" style=" margin:0 auto;">Start Survey</button></a>
+                <a href="#takeSurvey"><button class="btn btn-primary" style=" margin:0 auto;">Start Survey</button></a>
             </div>
         </div>
         
@@ -338,16 +338,110 @@
 </script>
 <!-- end view room template -->
 
+
+<!-- the next two templates are for experiment subject actions, not admin -->
+
+<!-- template for user taking survey -->
+<script id="take-survey-template" type="text/template">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">SRS</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Help</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <center>
+        <div id="page-content-wrapper">
+            <h1>A Few Questions</h1>
+            <form name="myForm" method="POST">
+                <div id="dynamicInputs">Add Questions</div>
+                <p>  
+                    <select name="inputSelect">
+                        <option value="text">text field</option>
+                        <option value="radio">radio button</option>
+                        <option value="checkbox">checkbox</option>
+                        <option value="textarea">textarea</option>
+                    </select>
+
+                    </br></br>
+                    
+                    <input type="button" id="answer" value="Response Type" disabled="disabled">
+                    <input type="button" id="question" value="New Question">
+                      
+                    </br>
+                </p>
+            </form>
+        </div>
+    </center>
+
+</script>
+<!-- end take survey template -->
+
+<!-- template for user selecting a chair in room -->
+<script id="select-chair-template" type="text/template">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">SRS</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Help</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <center>
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <h1>Where Would You Sit?</h1>
+                </div>
+                <div id="room">
+                    <!-- grid goes here -->
+                </div>
+            </div>
+        </div>
+    </center>
+</script>
+<!-- end select chair template -->
+
+<!-- lib js files -->
 <script src="lib/jquery.js"></script>
 <script src="lib/bootstrap.js"></script>
 <script src="lib/handlebars.js"></script>
 <script src="lib/router.js"></script>
+<script src="lib/mongowrap.js"></script>
 
+<!-- js files for views -->
 <script src="js/HomeView.js"></script>
 <script src="js/AdminHomeView.js"></script>
 <script src="js/ConfigureRoomLayoutView.js"></script>
 <script src="js/ConfigureSurveyView.js"></script>
 <script src="js/ViewRoomView.js"></script>
+<script src="js/TakeSurveyView.js"></script>
+<script src="js/SelectChairView.js"></script>
+
+<!-- main app js -->
 <script src="js/app.js"></script>
 
 </body>

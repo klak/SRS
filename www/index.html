@@ -365,24 +365,17 @@
     <center>
         <div id="page-content-wrapper">
             <h1>A Few Questions</h1>
-            <form name="myForm" method="POST">
-                <div id="dynamicInputs">Add Questions</div>
-                <p>  
-                    <select name="inputSelect">
-                        <option value="text">text field</option>
-                        <option value="radio">radio button</option>
-                        <option value="checkbox">checkbox</option>
-                        <option value="textarea">textarea</option>
-                    </select>
 
-                    </br></br>
-                    
-                    <input type="button" id="answer" value="Response Type" disabled="disabled">
-                    <input type="button" id="question" value="New Question">
-                      
-                    </br>
-                </p>
+            <form id="survey-form">
+                <div id="survey">
+                </div>
+
+                <a href="#selectChair"><input type="submit" id="submit-survey" value="Submit"></a>
             </form>
+
+            </br>
+            
+
         </div>
     </center>
 
@@ -416,7 +409,7 @@
                 <div class="row">
                     <h1>Where Would You Sit?</h1>
                 </div>
-                <div id="room">
+                <div id="test-room">
                     <!-- grid goes here -->
                 </div>
             </div>

@@ -1,112 +1,140 @@
 var SelectChairView = function () {
 
-	this.initialize = function() {
-        // todo: must call grid() first... (corresponds to "onload=grid()" in original code)
+	  this.initialize = function() {
 
-		// div wrapper for view, used to attach events
-		this.$el = $('<div/>');
+    		// div wrapper for view, used to attach events
+    		this.$el = $('<div/>');
 
-    // todo: fetch grid from active test, populate grid
-    getDocsWithQuery("wwystest", "tests_dev", JSON.stringify({"activeFlag":"true"})).
-        then(
-          function(tests) {
-            var activeTest = tests[0];
-            console.log("num tests:" + tests.length);
-            console.log("test:" + JSON.stringify(activeTest));
-            console.log("room height:" + activeTest.RoomLayout.height);
-            console.log("room width:" + activeTest.RoomLayout.width);
-            console.log("empty chairs" + activeTest.RoomLayout.emptyChairs);
-            console.log("occupied chairs" + activeTest.RoomLayout.occupiedChairs);
-            
-            // populate and display room here
-          }
-        );
+        console.log("answers passed from survey are: " + localStorage.getItem("answerString"));
+        
+        // fetch grid from active test in db, populate and render grid
+        getDocsWithQuery("wwystest", "tests_dev", JSON.stringify({"activeFlag":"true"})).
+            then(
+                function(tests) {
+                    var activeTest = tests[0];
+                    //console.log("num tests:" + tests.length);
+                    //console.log("test:" + JSON.stringify(activeTest));
+                    console.log("room height:" + activeTest.RoomLayout.height);
+                    console.log("room width:" + activeTest.RoomLayout.width);
+                    console.log("empty chairs" + activeTest.RoomLayout.emptyChairs);
+                    console.log("occupied chairs" + activeTest.RoomLayout.occupiedChairs);
+                    
+                    // populate and display room here
+                    renderRoom(activeTest.RoomLayout.height,
+                                activeTest.RoomLayout.width,
+                                activeTest.RoomLayout.emptyChairs,
+                                activeTest.RoomLayout.occupiedChairs);
+                }
+            );
 
+    		this.render();
+	  };
 
-
-		this.render();
-	};
-
-	this.render = function() {
+	  this.render = function() {
         this.$el.html(this.template());
-        this.grid();
-        //$('.content', this.$el).html(employeeListView.$el);
         return this;
     };
 
-    this.grid = function() {
-
-        var counter = 0;
-        // Grabs the number from the form in the height box
-        var height = localStorage.getItem('gridHeight');
-        //console.log("height is: ", height);
-
-        //Grabs the number from the form in the width box
-        var width = localStorage.getItem('gridWidth');
-        //console.log("width is: ", width);
-
-        var lastClicked;
-
-        var grid = loadClickableGrid(height, width,
-                    function(el,row,col,i){
-
-
-              });
-
-        //prints the array
-        //var testGrid = document.getElementById("test").appendChild(grid);
-        $("#grid", this.$el).html(grid);
-
-
-    }
 
     this.initialize();
 
-    // TODO: stick javascript that configure room needs in here somewhere.
-    // TODO: build some sort of structure around local storage???
 }
 
-      var loadClickableGrid = function( rows, cols, callback) {
-          var i=0;
-          //console.log("empty chairs are: ", localStorage.getItem('empChairArray'));
-          //console.log("empty chairs are: ", localStorage.getItem('occChairArray'));
+function renderRoom(height, width, emptyChairs, occupiedChairs) {
 
-          var empChairArray = localStorage.getItem('empChairArray').split(",");
-          var occChairArray = localStorage.getItem('occChairArray').split(",");
-          var grid = document.createElement('table');
-          grid.className = 'grid';
+    var counter = 0;
 
-          //creates the rows
-          for (var r=0;r<rows;++r){
-              var tr = grid.appendChild(document.createElement('tr'));
-              
-              //creates the columns
-              for (var c=0;c<cols;++c){
-                  var cell = tr.appendChild(document.createElement('td'));
-                  //adds numbers to the cells
-                  //cell.innerHTML = ++i;
-                  cell.id = ++i;
-                  if(cell.id == empChairArray[0]){
+    var lastClicked;
+
+    var grid = generateGrid(height, width, emptyChairs, occupiedChairs);
+
+    $("#test-room").html(grid);
+}
+
+function generateGrid( rows, cols, empChairArray, occChairArray) {
+    
+    var idCtr = 0;
+
+    var grid = document.createElement('table');
+    grid.className = 'grid';
+
+    // creates the rows
+    for (var r = 0; r < rows; ++r){
+        var tr = grid.appendChild(document.createElement('tr'));
+        
+        // creates the columns
+        for (var c = 0; c < cols; ++c){
+            var cell = tr.appendChild(document.createElement('td'));
+            // adds id to the cell
+            cell.id = ++idCtr;
+
+            for (var x in empChairArray)
+            {
+                if (r == empChairArray[x][0] && c == empChairArray[x][1])
+                {
                     cell.className = 'clicked1';
-                    empChairArray.shift();
-                  }
+                    console.log()
+                }
+            }
 
-                  else if(cell.id == occChairArray[0]){
+            for (var x in occChairArray)
+            {
+                if (r == occChairArray[x][0] && c == occChairArray[x][1])
+                {
                     cell.className = 'clicked2';
-                    occChairArray.shift();
-                  }
+                }
+            }
+        }
+    }
 
+    // add click listener for all the grid places
+    $("#test-room").on('click', 'td',
+        function()
+        {
+            verifySelection(0, 0, $(this).attr('id'));
 
-                  cell.addEventListener('click',(function(el,r,c,i){
-                      return function(){
-                          callback(el,r,c,i);
-                      };
-                  })
+            // todo: this should save id to local storage instead of passing, maybe?
+            saveTestData($(this).attr('id'));
+        }
+    );
 
-                  (cell,r,c,i),false);
-              }
+    return grid;
+}
+
+function verifySelection(row, col, id)
+{
+    alert("you selected seat with id " + id);
+    // TODO: this should actually ask "are you sure?" or something, and
+    // go back if the user says no.
+}
+
+function saveTestData(chairId)
+{
+    var surveyResults = JSON.parse(localStorage.getItem("answerString"));
+
+    var answers = [];
+
+    for (var x in surveyResults)
+    {
+        //console.log("adding " + surveyResults[x].value + " to list of answers");
+        answers.push(surveyResults[x].value);
+
+    }
+
+    // build up our result object to send to the database
+    var result = new Object();
+    result.surveyAnswers = answers;
+    result.chairChoice = chairId;
+
+    //resultString = JSON.stringify(result);
+
+    insertDocument("wwystest", "results_dev", result).
+      then(function() {
+              console.log("saved to db: " + JSON.stringify(result))
           }
-          return grid;
-      }
+      );
+
+
+}
 
 

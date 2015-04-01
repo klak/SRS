@@ -1,7 +1,7 @@
 /*
 *
 * Wrapper class for MongoDB instance, abstracting away
-* REST interface for some basic operations.
+* REST interface for some basic operations, for CS 495 Capstone project.
 * 
 * When calling these, one should keep in mind that these functions, 
 * since they are inherently asynchronous, make promises to be later fulfilled.

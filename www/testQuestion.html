@@ -5,6 +5,7 @@
           <link href="css/admin.css" rel="stylesheet">
      
     <link href="css/sandstone.css" rel="stylesheet">
+    <script scr="mongowrap.js"></script>
      <style>
     .grid { margin:1em auto; border-collapse:collapse }
     .grid td {
@@ -99,8 +100,10 @@
           <br>
           <br>
           <input type="button" id="answer" value="Response Type" onclick="addAllInputs('dynamicInputs', document.myForm.inputSelect.value, false);" disabled="disabled">
-          <input type="button" id="question" value="New Question" onclick="addAllInputs('dynamicInputs', 'text', true);">
-          
+          <input type="button" id="question" value="New Question" onclick="addAllInputsHelper('dynamicInputs', 'text', true);"> 
+          <br/>
+          <br/>
+          <input type="button" id="finish" value="Finish" onclick="sendToDatabase();">
           <br>
      </p>
 </form>
@@ -122,14 +125,30 @@ function addInput(divName){
      }
 }
 
+// Arrays that contain the survey data.
+// Will be sent to the database.
+var questionsArray = [];
+
+var answerTypesArray = [];
+var tempAnswerTypes = [];
+
+var answerChoicesArray = [];
+
+
 var firstQuest = true
 var answerBool  = false;
 var counterQuestion = 0;
 
+function addAllInputsHelper(divName, inputType, questionBool){
+      addAllInputs(divName, inputType, questionBool);
+      answerTypesArray[answerTypesArray.length] = tempAnswerTypes;
+      console.log(answerTypesArray);
+      tempAnswerTypes = [];
+}
+
+
 function addAllInputs(divName, inputType, questionBool){
      var newdiv = document.createElement('div');
-
-
      if (questionBool == true){
           
           // Ensures that no question is added without an answer option
@@ -149,27 +168,39 @@ function addAllInputs(divName, inputType, questionBool){
           switch(inputType) {
                case 'text':
                     newdiv.innerHTML = "<br>" + "<input type='text' name='myInputs[]'>";
+                    tempAnswerTypes[tempAnswerTypes.length] = "text";
                     break;
                case 'radio':
                     newdiv.innerHTML = "<br>" + "<input type='radio' name='myRadioButtons[]'>" + "<input text='text'>";
+                    tempAnswerTypes[tempAnswerTypes.length] = "radio";                   
                     break;
                case 'checkbox':
                     newdiv.innerHTML = "<br>" + "<input type='checkbox' name='myCheckBoxes[]'>" + "<input text='text'>";
+                    tempAnswerTypes[tempAnswerTypes.length] = "checkbox";
                     break;
                case 'textarea':
-                 newdiv.innerHTML = "<br>" + "<textarea name='myTextAreas[]'>type here...</textarea>";
+                    newdiv.innerHTML = "<br>" + "<textarea name='myTextAreas[]'>type here...</textarea>";
+                    tempAnswerTypes[tempAnswerTypes.length] = "textarea";
                     break;
                }
                answerBool = true;
+               
           }
 
      // Disables the answer button unless there has been a question
 
-     if(questionBool == true){
+    if(questionBool == true){
           answer.disabled=false;
      }
 
      document.getElementById(divName).appendChild(newdiv);
+}
+
+
+function sendToDatabase() {
+    answerTypesArray[answerTypesArray.length] = tempAnswerTypes;
+    answerTypesArray.shift();
+    console.log(answerTypesArray);
 }
 
 

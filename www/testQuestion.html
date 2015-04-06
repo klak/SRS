@@ -153,7 +153,7 @@ function addAllInputs(divName, inputType, questionBool){
           
           // Ensures that no question is added without an answer option
           if(firstQuest == true || answerBool == true){
-               newdiv.innerHTML = "<br>" + (counterQuestion + 1) + ".)" + "<br><input type='text' name='myInputs[]'>";
+               newdiv.innerHTML = "<br>" + (counterQuestion + 1) + ".)" + "<br><input id='newDiv' type='text' name='myInputs[]'>";
                counterQuestion++;
                firstQuest = false;
                answerBool = false;
@@ -194,10 +194,11 @@ function addAllInputs(divName, inputType, questionBool){
      }
 
      document.getElementById(divName).appendChild(newdiv);
+     console.log(document.getElementById("newDiv").value);
 }
 
 function getQuestionData() {
-    console.log(document.getElementById("question").value);
+    //console.log(document.getElementById("question").value);
 }
 
 

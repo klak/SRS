@@ -99,11 +99,11 @@
           </select>
           <br>
           <br>
-          <input type="button" id="answer" value="Response Type" onclick="addAllInputs('dynamicInputs', document.myForm.inputSelect.value, false);" disabled="disabled">
-          <input type="button" id="question" value="New Question" onclick="addAllInputsHelper('dynamicInputs', 'text', true);"> 
+          <input type="button" class="btn btn-primary btn-sm" id="answer" value="Response Type" onclick="addAllInputs('dynamicInputs', document.myForm.inputSelect.value, false);" disabled="disabled">
+          <input type="button" class="btn btn-primary btn-sm" id="question" value="New Question" onclick="addAllInputsHelper('dynamicInputs', 'text', true);"> 
           <br/>
           <br/>
-          <input type="button" id="finish" value="Finish" onclick="sendToDatabase();">
+          <input type="button" class="btn btn-success" id="finish" value="Finish" onclick="sendToDatabase();">
           <br>
      </p>
 </form>
@@ -142,7 +142,7 @@ var counterQuestion = 0;
 function addAllInputsHelper(divName, inputType, questionBool){
       addAllInputs(divName, inputType, questionBool);
       answerTypesArray[answerTypesArray.length] = tempAnswerTypes;
-      console.log(answerTypesArray);
+      //console.log(answerTypesArray);
       tempAnswerTypes = [];
 }
 
@@ -196,11 +196,16 @@ function addAllInputs(divName, inputType, questionBool){
      document.getElementById(divName).appendChild(newdiv);
 }
 
+function getQuestionData() {
+    console.log(document.getElementById("question").value);
+}
+
 
 function sendToDatabase() {
     answerTypesArray[answerTypesArray.length] = tempAnswerTypes;
     answerTypesArray.shift();
-    console.log(answerTypesArray);
+    //console.log(answerTypesArray);
+    getQuestionData();
 }
 
 

@@ -111,9 +111,7 @@
 </div>
 
 <script>
-var counter = 1; // adds the number to the questions
 var countAnswers = 0; // Number of answers per question.
-var totalAnswers = 0; // Total number of answers.
 
 // Arrays that contain the survey data.
 // Will be sent to the database.
@@ -149,14 +147,13 @@ function addAllInputs(divName, inputType, questionBool){
      if (questionBool == true){
           
           // Ensures that no question is added without an answer option
-          if(countAnswers = 0)
-          {
-              numberArr.push(countAnswers);
-          }
           if(firstQuest == true || answerBool == true){
                var HTMLstring = "<br>" + (counterQuestion + 1) + ".)" + "<br><input id='newDiv" + countAnswers + "' type='text' name='myInputs[]'>";
                console.log(HTMLstring);
                newdiv.innerHTML = HTMLstring;
+              if(countAnswers != 0){
+              numberArr.push(countAnswers);
+            }
                counterQuestion++;
                countAnswers = 0;
                firstQuest = false;
@@ -171,30 +168,29 @@ function addAllInputs(divName, inputType, questionBool){
      else{
           switch(inputType) {
                case 'text':
-                    newdiv.innerHTML = "<br>" + "<input type='text' id='" + countAnswers + "'>";
+                    newdiv.innerHTML = "<br>" + "<input type='text' id=' q" + counterQuestion + "a" + countAnswers + "'>";
                     tempAnswerTypes[tempAnswerTypes.length] = "text";
                     countAnswers++;
                     break;
                case 'radio':
-                    newdiv.innerHTML = "<br>" + "<input type='radio' id='" + countAnswers + "'>" + "<input text='text'>";
+                    newdiv.innerHTML = "<br>" + "<input type='radio' id='q" + counterQuestion + "a" + countAnswers + "'>" + "<input text='text'>";
                     tempAnswerTypes[tempAnswerTypes.length] = "radio"; 
                     countAnswers++;                  
                     break;
                case 'checkbox':
-                    newdiv.innerHTML = "<br>" + "<input type='checkbox' id='" + countAnswers + "'>" + "<input text='text'>";
+                    newdiv.innerHTML = "<br>" + "<input type='checkbox' id='q" + counterQuestion + "a" + countAnswers + "'>" + "<input text='text'>";
                     tempAnswerTypes[tempAnswerTypes.length] = "checkbox";
                     countAnswers++;
                     break;
                case 'textarea':
-                    newdiv.innerHTML = "<br>" + "<textarea id='" + countAnswers + "'>type here...</textarea>";
+                    newdiv.innerHTML = "<br>" + "<textarea id='q" + counterQuestion + "a" + countAnswers + "'>type here...</textarea>";
                     tempAnswerTypes[tempAnswerTypes.length] = "textarea";
                     countAnswers++;
                     break;
 
                }
-               totalAnswers++;
                answerBool = true;
-               
+                
           }
 
      // Disables the answer button unless there has been a question
@@ -209,11 +205,11 @@ function addAllInputs(divName, inputType, questionBool){
 //save function
 function save()
 {
-  console.log(totalAnswers);
-    for(i = 0; i <= totalAnswers; i++)
+    for(i = 0; i <= counterQuestion; i++)
     {
         var tempAnswerChoicesArray = [];
         var tempNum = numberArr.shift();
+        console.log(tempNum);
         for(k = 0; k <= tempNum; k++)
         {
             tempAnswerChoicesArray.push(document.getElementById(k).value);

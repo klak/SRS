@@ -224,15 +224,23 @@ function save()
         //console.log(answerChoicesArray);
     }
     //console.log(questionsArray);
-    sendToDatabase();
+    saveSurveyToLocalStorage();
+    window.location = "#configureRoom";
+
 }
 
-function sendToDatabase() {
+function saveSurveyToLocalStorage() {
     answerTypesArray[answerTypesArray.length] = tempAnswerTypes;
     answerTypesArray.shift();
     console.log(answerTypesArray);
     console.log(answerChoicesArray);
     console.log(questionsArray);
+    var surveyQuestions = new Object();
+    surveyQuestions.questions = questionsArray;
+    surveyQuestions.answerTypes = answerTypesArray;
+    surveyQuestions.answerChoices = answerChoicesArray;
+    JSON.stringify(surveyQuestions);
+    localStorage.setItem("surveyQuestions", surveyQuestions);
 }
 
 

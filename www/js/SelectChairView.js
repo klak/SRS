@@ -95,6 +95,8 @@ function generateGrid( rows, cols, empChairArray, occChairArray) {
 
             // todo: this should save id to local storage instead of passing, maybe?
             saveTestData($(this).attr('id'));
+            // and redirect to view for selecting chair
+            window.location = "#thankyou";
         }
     );
 

@@ -10,16 +10,7 @@
     ViewRoomView.prototype.template = Handlebars.compile($("#view-room-template").html());
     TakeSurveyView.prototype.template = Handlebars.compile($('#take-survey-template').html());
     SelectChairView.prototype.template = Handlebars.compile($("#select-chair-template").html());
-
-    /*datastorage.initialize().done(function () {
-        //console.log("Service initialized");
-        router.addRoute('', function (){
-            $('body').html(new HomeView().render().$el);
-        });
-
-        router.start();
-        
-    });*/
+    ThankYouView.prototype.template = Handlebars.compile($("#thank-you-template").html());
 
     router.addRoute('', function(){
         $('body').html(new HomeView().render().$el);
@@ -53,6 +44,9 @@
         $('body').html(new SelectChairView().render().$el);
     });
 
+    router.addRoute('thankyou', function() {
+        $('body').html(new ThankYouView().render().$el);
+    });
 
 
     router.start();

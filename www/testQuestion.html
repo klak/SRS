@@ -148,7 +148,7 @@ function addAllInputs(divName, inputType, questionBool){
           
           // Ensures that no question is added without an answer option
           if(firstQuest == true || answerBool == true){
-               var HTMLstring = "<br>" + (counterQuestion + 1) + ".)" + "<br><input id='newDiv" + countAnswers + "' type='text' name='myInputs[]'>";
+               var HTMLstring = "<br>" + (counterQuestion + 1) + ".)" + "<br><input id='newDiv" + counterQuestion + "' type='text' name='myInputs[]'>";
                console.log(HTMLstring);
                newdiv.innerHTML = HTMLstring;
               if(countAnswers != 0){
@@ -208,7 +208,7 @@ function save()
     if(countAnswers != 0){
         numberArr.push(countAnswers);
             }
-    console.log(numberArr);
+    //console.log(numberArr);
     for(i = 0; i < counterQuestion; i++)
     {
         var tempAnswerChoicesArray = [];
@@ -220,21 +220,20 @@ function save()
             tempAnswerChoicesArray.push(document.getElementById("q" + (i + 1) + "a" + k).value);
         }
         answerChoicesArray.push(tempAnswerChoicesArray);
-        console.log(answerChoicesArray);
+        questionsArray.push(document.getElementById("newDiv" + i).value);
+        //console.log(answerChoicesArray);
     }
+    //console.log(questionsArray);
+    sendToDatabase();
 }
 
-function getQuestionData() {
-    //console.log(document.getElementById("question").value);
-}
-
-
-/*function sendToDatabase() {
+function sendToDatabase() {
     answerTypesArray[answerTypesArray.length] = tempAnswerTypes;
     answerTypesArray.shift();
-    //console.log(answerTypesArray);
-    getQuestionData();
-}*/
+    console.log(answerTypesArray);
+    console.log(answerChoicesArray);
+    console.log(questionsArray);
+}
 
 
 </script>

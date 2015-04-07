@@ -103,7 +103,7 @@
           <input type="button" class="btn btn-primary btn-sm" id="question" value="New Question" onclick="addAllInputsHelper('dynamicInputs', 'text', true);"> 
           <br/>
           <br/>
-          <input type="button" class="btn btn-success" id="finish" value="Finish" onclick="sendToDatabase();">
+          <input type="button" class="btn btn-success" id="finish" value="Finish" onclick="save();">
           <br>
      </p>
 </form>
@@ -112,21 +112,28 @@
 
 <script>
 var counter = 1; // adds the number to the questions
+var countAnswers = 0; // Number of answers per question.
+var totalAnswers = 0; // Total number of answers.
 
 // Arrays that contain the survey data.
 // Will be sent to the database.
 var questionsArray = [];
-
 var answerTypesArray = [];
 var tempAnswerTypes = [];
-
 var answerChoicesArray = [];
+var numberArr = [];
 
 
 var firstQuest = true
 var answerBool  = false;
 var counterQuestion = 0;
 
+/*
+  Helper function that is called when the "New Question" button is pressed.
+  Stores the data collected from addAllInputs() and stores it in a temporary array.
+  The temporary array added to the answerTypesArray[].
+  The temporary array is then emptied.
+*/
 function addAllInputsHelper(divName, inputType, questionBool){
       addAllInputs(divName, inputType, questionBool);
       answerTypesArray[answerTypesArray.length] = tempAnswerTypes;
@@ -134,15 +141,20 @@ function addAllInputsHelper(divName, inputType, questionBool){
       tempAnswerTypes = [];
 }
 
-
+/*
+  Main function for adding new questions and responses.
+*/
 function addAllInputs(divName, inputType, questionBool){
      var newdiv = document.createElement('div');
      if (questionBool == true){
           
           // Ensures that no question is added without an answer option
           if(firstQuest == true || answerBool == true){
-               newdiv.innerHTML = "<br>" + (counterQuestion + 1) + ".)" + "<br><input id='newDiv' type='text' name='myInputs[]'>";
+               var HTMLstring = "<br>" + (counterQuestion + 1) + ".)" + "<br><input id='newDiv" + countAnswers + "' type='text' name='myInputs[]'>";
+               console.log(HTMLstring);
+               newdiv.innerHTML = HTMLstring;
                counterQuestion++;
+               countAnswers = 0;
                firstQuest = false;
                answerBool = false;
           }
@@ -155,22 +167,28 @@ function addAllInputs(divName, inputType, questionBool){
      else{
           switch(inputType) {
                case 'text':
-                    newdiv.innerHTML = "<br>" + "<input type='text' name='myInputs[]'>";
+                    newdiv.innerHTML = "<br>" + "<input type='text' id='" + countAnswers + "'>";
                     tempAnswerTypes[tempAnswerTypes.length] = "text";
+                    countAnswers++;
                     break;
                case 'radio':
-                    newdiv.innerHTML = "<br>" + "<input type='radio' name='myRadioButtons[]'>" + "<input text='text'>";
-                    tempAnswerTypes[tempAnswerTypes.length] = "radio";                   
+                    newdiv.innerHTML = "<br>" + "<input type='radio' id='" + countAnswers + "'>" + "<input text='text'>";
+                    tempAnswerTypes[tempAnswerTypes.length] = "radio"; 
+                    countAnswers++;                  
                     break;
                case 'checkbox':
-                    newdiv.innerHTML = "<br>" + "<input type='checkbox' name='myCheckBoxes[]'>" + "<input text='text'>";
+                    newdiv.innerHTML = "<br>" + "<input type='checkbox' id='" + countAnswers + "'>" + "<input text='text'>";
                     tempAnswerTypes[tempAnswerTypes.length] = "checkbox";
+                    countAnswers++;
                     break;
                case 'textarea':
-                    newdiv.innerHTML = "<br>" + "<textarea name='myTextAreas[]'>type here...</textarea>";
+                    newdiv.innerHTML = "<br>" + "<textarea id='" + countAnswers + "'>type here...</textarea>";
                     tempAnswerTypes[tempAnswerTypes.length] = "textarea";
+                    countAnswers++;
                     break;
+
                }
+               totalAnswers++;
                answerBool = true;
                
           }
@@ -182,7 +200,23 @@ function addAllInputs(divName, inputType, questionBool){
      }
 
      document.getElementById(divName).appendChild(newdiv);
-     console.log(document.getElementById("newDiv").value);
+     console.log(document.getElementById("newDiv0").value);
+}
+
+function save()
+{
+  console.log(totalAnswers);
+    for(i = 0; i <= totalAnswers; i++)
+    {
+        var tempAnswerChoicesArray = [];
+        var tempNum = numberArr.shift();
+        for(k = 0; k <= tempNum; k++)
+        {
+            tempAnswerChoicesArray.push(document.getElementById(k).value);
+        }
+        answerChoicesArray.push(tempAnswerChoicesArray);
+        console.log(answerChoicesArray);
+    }
 }
 
 function getQuestionData() {
@@ -190,12 +224,12 @@ function getQuestionData() {
 }
 
 
-function sendToDatabase() {
+/*function sendToDatabase() {
     answerTypesArray[answerTypesArray.length] = tempAnswerTypes;
     answerTypesArray.shift();
     //console.log(answerTypesArray);
     getQuestionData();
-}
+}*/
 
 
 </script>

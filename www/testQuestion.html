@@ -149,6 +149,10 @@ function addAllInputs(divName, inputType, questionBool){
      if (questionBool == true){
           
           // Ensures that no question is added without an answer option
+          if(countAnswers = 0)
+          {
+              numberArr.push(countAnswers);
+          }
           if(firstQuest == true || answerBool == true){
                var HTMLstring = "<br>" + (counterQuestion + 1) + ".)" + "<br><input id='newDiv" + countAnswers + "' type='text' name='myInputs[]'>";
                console.log(HTMLstring);

@@ -168,7 +168,7 @@ function addAllInputs(divName, inputType, questionBool){
      else{
           switch(inputType) {
                case 'text':
-                    newdiv.innerHTML = "<br>" + "<input type='text' id=' q" + counterQuestion + "a" + countAnswers + "'>";
+                    newdiv.innerHTML = "<br>" + "<input type='text' id='q" + counterQuestion + "a" + countAnswers + "'>";
                     tempAnswerTypes[tempAnswerTypes.length] = "text";
                     countAnswers++;
                     break;
@@ -205,14 +205,19 @@ function addAllInputs(divName, inputType, questionBool){
 //save function
 function save()
 {
-    for(i = 0; i <= counterQuestion; i++)
+    if(countAnswers != 0){
+        numberArr.push(countAnswers);
+            }
+    console.log(numberArr);
+    for(i = 0; i < counterQuestion; i++)
     {
         var tempAnswerChoicesArray = [];
         var tempNum = numberArr.shift();
         console.log(tempNum);
-        for(k = 0; k <= tempNum; k++)
+        for(k = 0; k < tempNum; k++)
         {
-            tempAnswerChoicesArray.push(document.getElementById(k).value);
+            console.log("q" + (i + 1) + "a" + k);
+            tempAnswerChoicesArray.push(document.getElementById("q" + (i + 1) + "a" + k).value);
         }
         answerChoicesArray.push(tempAnswerChoicesArray);
         console.log(answerChoicesArray);

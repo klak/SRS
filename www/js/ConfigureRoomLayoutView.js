@@ -185,11 +185,11 @@ var saveTest = function()
     var survey = JSON.parse(localStorage.getItem("surveyQuestions"));
 
     var fullTest = new Object();
-    fullTest.RoomLayout = new Object();
-
+    
     fullTest.activeFlag = "true";
     fullTest.surveyQuestions = survey;
 
+    fullTest.RoomLayout = new Object();
     fullTest.RoomLayout.height = localStorage.getItem("gridHeight");
     fullTest.RoomLayout.width = localStorage.getItem("gridWidth");
     fullTest.RoomLayout.emptyChairs = emptyChairTuples;
@@ -198,10 +198,47 @@ var saveTest = function()
 
     console.log("full test to save to db is: " + JSON.stringify(fullTest));
 
+    // first, let's see if there are any active tests in db (there should be at most 1)
+    getDocsWithQuery("wwystest", "tests_dev", JSON.stringify({"activeFlag":"true"}))
+    .then(
+        function(activeTests) {
+            if (activeTests.length > 1) 
+            {
+                alert("Something has gone wrong with the database. Please contact a developer for assistance.");
+                window.location = "#home";
+            }
 
-    insertDocument("wwystest", "tests_dev", fullTest).then(
-        function() {
-            console.log("test saved to database successfully.");
-        });
+            if (activeTests.length == 0)
+            {
+                console.log("no active test currently, so no need to deactive old one.")
+                insertDocument("wwystest", "tests_dev", fullTest).then(
+                    function() {
+                        console.log("test saved to database successfully.");
+                    }
+                ); 
+            }
+
+            var activeTest = activeTests[0];
+            var activeId = activeTest._id.$oid;
+            console.log("id of active test is:" + activeId);
+
+            // now, let's deactive the current active test
+            updateDocById("wwystest", "tests_dev", activeId, {"activeFlag":"false"})
+            .then(
+                function() {
+                    console.log("successfully de-activated old active test.");
+
+                    // and now insert the newly-created test.
+                    insertDocument("wwystest", "tests_dev", fullTest)
+                    .then(
+                        function() {
+                            console.log("test saved to database successfully.");
+                        }
+                    );
+                }
+            )
+        }
+
+    );
 
 }

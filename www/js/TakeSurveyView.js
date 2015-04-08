@@ -57,7 +57,7 @@ function populateQuestions(test, divName)
   for (var i = 0; i < test.surveyQuestions.questions.length; i++)
   {
     var curQuestion = test.surveyQuestions.questions[i];
-    var curType = test.surveyQuestions.answerTypes[i];
+    var curTypes = test.surveyQuestions.answerTypes[i];
     var curAnswers = test.surveyQuestions.answerChoices[i];
 
     var questionDiv = document.createElement('div');
@@ -71,7 +71,7 @@ function populateQuestions(test, divName)
     
     for (var x in curAnswers)
     {
-      answerHtml += "<input type='" + curType + "' name='answer" + (i+1) + "' value='" 
+        answerHtml += "<input type='" + curTypes[x] + "' name='answer" + (i+1) + "' value='" 
                   + curAnswers[x] + "'>" + curAnswers[x] + "</input></br>";
     }
 

@@ -134,8 +134,12 @@ var saveTest = function()
 {
     // TODO: in this func we are actually going to save to DB along with survey
 
-    var gridArray1 = new Array();
-    var gridArray2 = new Array();
+    var emptyChairIds = new Array();
+    var occupiedChairIds = new Array();
+
+    var emptyChairTuples = new Array();
+    var occupiedChairTuples = new Array();
+
     // var table = document.getElementById('table');
     var table = document.getElementById('grid-table');
     
@@ -143,21 +147,61 @@ var saveTest = function()
     {
         for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
             console.log(table.rows[r].cells[c].className);
-            if(table.rows[r].cells[c].className == 'clicked1'){
-              gridArray1.push(table.rows[r].cells[c].id);
 
+            if (table.rows[r].cells[c].className == 'clicked1'){
+              emptyChairIds.push(table.rows[r].cells[c].id);
+              var tempTuple = [];
+              tempTuple.push(r);
+              tempTuple.push(c);
+              emptyChairTuples.push(tempTuple);
             }
-            else if(table.rows[r].cells[c].className == 'clicked2'){
-              gridArray2.push(table.rows[r].cells[c].id);
+            else if (table.rows[r].cells[c].className == 'clicked2'){
+              occupiedChairIds.push(table.rows[r].cells[c].id);
+              var tempTuple = [];
+              tempTuple.push(r);
+              tempTuple.push(c);
+              occupiedChairTuples.push(tempTuple);
             }
         }
-    } 
-    var toLocal1 = gridArray1.toString();
-    var toLocal2 = gridArray2.toString(); 
-    console.log("saving to empChairArray: ", toLocal1);
-    console.log("saving to occChairArray: ", toLocal2);
+    }
+
+    var empIdsString = emptyChairIds.toString();
+    var occIdsString = occupiedChairIds.toString();
+
+    var empTuplesJson = JSON.stringify(emptyChairTuples);
+    var occTuplesJson = JSON.stringify(occupiedChairTuples);
+
+    console.log("empTuplesJson: ", empTuplesJson);
+    console.log("occTuplesJson: ", occTuplesJson);
+
+    console.log("saving to empChairArray: ", empIdsString);
+    console.log("saving to occChairArray: ", occIdsString);
 
 
-    localStorage.setItem('empChairArray', toLocal1);
-    localStorage.setItem('occChairArray', toLocal2);
+    localStorage.setItem('empChairIds', empIdsString);
+    localStorage.setItem('occChairIds', occIdsString);
+
+    // this is the survey we previous created
+    var survey = JSON.parse(localStorage.getItem("surveyQuestions"));
+
+    var fullTest = new Object();
+    fullTest.RoomLayout = new Object();
+
+    fullTest.activeFlag = "true";
+    fullTest.surveyQuestions = survey;
+
+    fullTest.RoomLayout.height = localStorage.getItem("gridHeight");
+    fullTest.RoomLayout.width = localStorage.getItem("gridWidth");
+    fullTest.RoomLayout.emptyChairs = emptyChairTuples;
+    fullTest.RoomLayout.occupiedChairs = occupiedChairTuples;
+    
+
+    console.log("full test to save to db is: " + JSON.stringify(fullTest));
+
+
+    insertDocument("wwystest", "tests_dev", fullTest).then(
+        function() {
+            console.log("test saved to database successfully.");
+        });
+
 }

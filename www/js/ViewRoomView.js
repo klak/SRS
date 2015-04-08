@@ -69,11 +69,11 @@ var ViewRoomView = function () {
 
       var loadClickableGrid = function( rows, cols, callback) {
           var i=0;
-          console.log("empty chairs are: ", localStorage.getItem('empChairArray'));
-          console.log("empty chairs are: ", localStorage.getItem('occChairArray'));
+          console.log("empty chairs are: ", localStorage.getItem('empChairIds'));
+          console.log("empty chairs are: ", localStorage.getItem('occChairIds'));
 
-          var empChairArray = localStorage.getItem('empChairArray').split(",");
-          var occChairArray = localStorage.getItem('occChairArray').split(",");
+          var empChairArray = localStorage.getItem('empChairIds').split(",");
+          var occChairArray = localStorage.getItem('occChairIds').split(",");
           var grid = document.createElement('table');
           grid.className = 'grid';
 

@@ -47,17 +47,36 @@ var ConfigureSurveyView = function () {
 
 
 var countAnswers = 0; // number of answers per question
+var counterQuestion = 0; // Number of questions.
 
 // Arrays that will contain survey data (will be sent to db)
 var questionsArray = [];
 var answerTypesArray = [];
 var tempAnswerTypes = [];
 var answerChoicesArray = [];
-var numberArr = [];
+var numberArr = []; // Contains the number of answer choices per question.
 
 var firstQuest = true
 var answerBool  = false;
-var counterQuestion = 0;
+var inputType = "";
+
+function selectInputType() {
+    inputType = document.getElementById("inputSelect").value;
+    switch(inputType) {
+        case 'text':
+          return 'text';
+        case 'radio':
+          return 'radio';
+        case 'checkbox':
+          return 'checkbox';
+        case 'textarea':
+          return 'textarea';
+    }
+}
+
+function newAnswerHelper() {
+    addAllInputs("dynamicInputs", inputType, false);
+}
 
 
 /*
@@ -67,6 +86,7 @@ var counterQuestion = 0;
   The temporary array is then emptied.
 */
 function addAllInputsHelper(divName, inputType, questionBool){
+    inputType = selectInputType(inputType);
     addAllInputs(divName, inputType, questionBool);
     answerTypesArray[answerTypesArray.length] = tempAnswerTypes;
     //console.log(answerTypesArray);

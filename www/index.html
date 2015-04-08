@@ -263,15 +263,19 @@
             <form name="myForm" method="POST">
                 <div id="dynamicInputs">Add Questions</div>
                 <p>  
-                    <select name="inputSelect">
+                    <select name="inputSelect" id="inputSelect">
                         <option value="text">text field</option>
                         <option value="radio">radio button</option>
                         <option value="checkbox">checkbox</option>
                         <option value="textarea">textarea</option>
                     </select>
                     </br></br>
-                    <input type="button" id="answer" value="Response Type" disabled="disabled">
-                    <input type="button" id="question" value="New Question">
+                    <input type="button" class="btn btn-primary btn-sm" id="question" value="Add Question">
+                    <input type="button" class="btn btn-primary btn-sm" id="answer" value="Add Answer" disabled="disabled">
+
+                    </br>
+                    </br>
+                     <input type="button" id="finish" value="Save">
                       
                     </br>
                 </p>

@@ -1,4 +1,4 @@
-var AdminHomeView = function () {
+var ExportDataView = function () {
 
 	this.initialize = function() {
 		// div wrapper for view, used to attach events

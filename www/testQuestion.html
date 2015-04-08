@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
      <head>
+          <link href="../css/bootstrap.css" rel="stylesheet">
           <link href="css/sandstone.css" rel="stylesheet">
           <link href="css/admin.css" rel="stylesheet">
      
@@ -190,23 +191,23 @@ function addAllInputs(divName, inputType, questionBool){
 
      else{
           switch(inputType) {
-               case 'text':
-                    newdiv.innerHTML = "<br>" + "<input type='text' id='q" + counterQuestion + "a" + countAnswers + "'><br/><br/>";
+               case 'text': 
+                    newdiv.innerHTML = "<br>" + "<input type='text' id='q" + counterQuestion + "a" + countAnswers + "'>"+"<button onclick='removeAns();' type='button' class='btn btn-xs'>" + "<span class='glyphicon glyphicon-remove'>" +"</span></button>"+ "<br/><br/>";
                     tempAnswerTypes[tempAnswerTypes.length] = "text";
                     countAnswers++;
                     break;
                case 'radio':
-                    newdiv.innerHTML = "<br>" + "<input type='radio' id='q" + counterQuestion + "a" + countAnswers + "'>" + "<input text='text'><br/><br/>";
+                    newdiv.innerHTML = "<br>" + "<input type='text' id='q" + counterQuestion + "a" + countAnswers + "'>"+"<button onclick='removeAns();' type='button' class='btn btn-xs'>" + "<span class='glyphicon glyphicon-remove'>" +"</span></button>"+ "<br/><br/>";
                     tempAnswerTypes[tempAnswerTypes.length] = "radio"; 
                     countAnswers++;                  
                     break;
                case 'checkbox':
-                    newdiv.innerHTML = "<br>" + "<input type='checkbox' id='q" + counterQuestion + "a" + countAnswers + "'>" + "<input text='text'><br/><br/>";
+                    newdiv.innerHTML = "<br>" + "<input type='text' id='q" + counterQuestion + "a" + countAnswers + "'>"+"<button onclick='removeAns();' type='button' class='btn btn-xs'>" + "<span class='glyphicon glyphicon-remove'>" +"</span></button>"+ "<br/><br/>";
                     tempAnswerTypes[tempAnswerTypes.length] = "checkbox";
                     countAnswers++;
                     break;
                case 'textarea':
-                    newdiv.innerHTML = "<br>" + "<textarea id='q" + counterQuestion + "a" + countAnswers + "'>type here...</textarea><br/><br/>";
+                    newdiv.innerHTML = "<br>" + "<input type='text' id='q" + counterQuestion + "a" + countAnswers + "'>"+"<button onclick='removeAns();' type='button' class='btn btn-xs'>" + "<span class='glyphicon glyphicon-remove'>" +"</span></button>"+ "<br/><br/>";
                     tempAnswerTypes[tempAnswerTypes.length] = "textarea";
                     countAnswers++;
                     break;
@@ -226,6 +227,16 @@ function addAllInputs(divName, inputType, questionBool){
 
      document.getElementById(divName).appendChild(newdiv);
      //console.log(document.getElementById("newDiv0").value);
+}
+
+function removeAns(id){
+  var elem = document.getElementById(id);
+  console.log(id);
+  elem.remove();
+}
+
+function removeQuestion(){
+  
 }
 
 /*

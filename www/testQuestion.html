@@ -83,15 +83,16 @@
      </div>
 
 
-
+<!-- Survey -->
 <div id="page-content-wrapper">
      <h1>New Survey</h1>
 <form name="myForm" method="POST">
+     <!-- Dynamic Inputs -->
      <div id="dynamicInputs">
           Add Questions
      </div>
      <p>  
-          <select name="inputSelect">
+          <select name="inputSelect" id="inputSelect">
                <option value="text">text field</option>
                <option value="radio">radio button</option>
                <option value="checkbox">checkbox</option>
@@ -99,8 +100,8 @@
           </select>
           <br>
           <br>
-          <input type="button" class="btn btn-primary btn-sm" id="question" value="Add Question" onclick="addAllInputsHelper('dynamicInputs', 'text', true);"> 
-          <input type="button" class="btn btn-primary btn-sm" id="answer" value="Add Answer" onclick="addAllInputs('dynamicInputs', document.myForm.inputSelect.value, false);" disabled="disabled">
+          <input type="button" class="btn btn-primary btn-sm" id="question" value="Add Question" onclick="addAllInputsHelper('dynamicInputs', true);"> 
+          <input type="button" class="btn btn-primary btn-sm" id="answer" value="Add Answer" onclick="helper();" disabled="disabled">
           <br/>
           <br/>
           <input type="button" class="btn btn-success" id="finish" value="Save" onclick="save();">
@@ -112,6 +113,7 @@
 
 <script>
 var countAnswers = 0; // Number of answers per question.
+var counterQuestion = 0; // Number of questions.
 
 // Arrays that contain the survey data.
 // Will be sent to the database.
@@ -119,12 +121,30 @@ var questionsArray = [];
 var answerTypesArray = [];
 var tempAnswerTypes = [];
 var answerChoicesArray = [];
-var numberArr = [];
+var numberArr = []; // Contains the number of answer choices per question.
 
-
-var firstQuest = true
+var firstQuest = true;
 var answerBool  = false;
-var counterQuestion = 0;
+var inputType = "";
+
+
+function selectInputType() {
+    inputType = document.getElementById("inputSelect").value;
+    switch(inputType) {
+        case 'text':
+          return 'text';
+        case 'radio':
+          return 'radio';
+        case 'checkbox':
+          return 'checkbox';
+        case 'textarea':
+          return 'textarea';
+    }
+}
+
+function helper() {
+    addAllInputs("dynamicInputs", inputType, false);
+}
 
 /*
   Helper function that is called when the "New Question" button is pressed.
@@ -132,7 +152,10 @@ var counterQuestion = 0;
   The temporary array added to the answerTypesArray[].
   The temporary array is then emptied.
 */
-function addAllInputsHelper(divName, inputType, questionBool){
+function addAllInputsHelper(divName, questionBool){
+      //newQuestion = false;
+      var inputType = selectInputType(inputType);
+      console.log(inputType);
       addAllInputs(divName, inputType, questionBool);
       answerTypesArray[answerTypesArray.length] = tempAnswerTypes;
       //console.log(answerTypesArray);
@@ -148,7 +171,7 @@ function addAllInputs(divName, inputType, questionBool){
           
           // Ensures that no question is added without an answer option
           if(firstQuest == true || answerBool == true){
-               var HTMLstring = "<br>" + (counterQuestion + 1) + ".)" + "<br><input id='newDiv" + counterQuestion + "' type='text' name='myInputs[]'>";
+               var HTMLstring = "<br>" + (counterQuestion + 1) + ".)" + "<br><input id='newDiv" + counterQuestion + "' type='text' name='myInputs[]'><br/><br/>";
                console.log(HTMLstring);
                newdiv.innerHTML = HTMLstring;
               if(countAnswers != 0){
@@ -168,30 +191,32 @@ function addAllInputs(divName, inputType, questionBool){
      else{
           switch(inputType) {
                case 'text':
-                    newdiv.innerHTML = "<br>" + "<input type='text' id='q" + counterQuestion + "a" + countAnswers + "'>";
+                    newdiv.innerHTML = "<br>" + "<input type='text' id='q" + counterQuestion + "a" + countAnswers + "'><br/><br/>";
                     tempAnswerTypes[tempAnswerTypes.length] = "text";
                     countAnswers++;
                     break;
                case 'radio':
-                    newdiv.innerHTML = "<br>" + "<input type='radio' id='q" + counterQuestion + "a" + countAnswers + "'>" + "<input text='text'>";
+                    newdiv.innerHTML = "<br>" + "<input type='radio' id='q" + counterQuestion + "a" + countAnswers + "'>" + "<input text='text'><br/><br/>";
                     tempAnswerTypes[tempAnswerTypes.length] = "radio"; 
                     countAnswers++;                  
                     break;
                case 'checkbox':
-                    newdiv.innerHTML = "<br>" + "<input type='checkbox' id='q" + counterQuestion + "a" + countAnswers + "'>" + "<input text='text'>";
+                    newdiv.innerHTML = "<br>" + "<input type='checkbox' id='q" + counterQuestion + "a" + countAnswers + "'>" + "<input text='text'><br/><br/>";
                     tempAnswerTypes[tempAnswerTypes.length] = "checkbox";
                     countAnswers++;
                     break;
                case 'textarea':
-                    newdiv.innerHTML = "<br>" + "<textarea id='q" + counterQuestion + "a" + countAnswers + "'>type here...</textarea>";
+                    newdiv.innerHTML = "<br>" + "<textarea id='q" + counterQuestion + "a" + countAnswers + "'>type here...</textarea><br/><br/>";
                     tempAnswerTypes[tempAnswerTypes.length] = "textarea";
                     countAnswers++;
                     break;
 
                }
-               answerBool = true;
+                answerBool = true;
                 
           }
+
+
 
      // Disables the answer button unless there has been a question
 
@@ -200,9 +225,12 @@ function addAllInputs(divName, inputType, questionBool){
      }
 
      document.getElementById(divName).appendChild(newdiv);
-     console.log(document.getElementById("newDiv0").value);
+     //console.log(document.getElementById("newDiv0").value);
 }
-//save function
+
+/*
+  Saves the question and answer data to arrays.
+*/
 function save()
 {
     if(countAnswers != 0){
@@ -229,12 +257,15 @@ function save()
 
 }
 
+/*
+  Sends the arrays to local storage.
+*/
 function saveSurveyToLocalStorage() {
     answerTypesArray[answerTypesArray.length] = tempAnswerTypes;
     answerTypesArray.shift();
-    console.log(answerTypesArray);
-    console.log(answerChoicesArray);
-    console.log(questionsArray);
+    console.log("Answer Types Array " + answerTypesArray);
+    console.log("Answer Choices Array " + answerChoicesArray);
+    console.log("Questions Array " + questionsArray);
     var surveyQuestions = new Object();
     surveyQuestions.questions = questionsArray;
     surveyQuestions.answerTypes = answerTypesArray;

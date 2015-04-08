@@ -1,6 +1,7 @@
 var ConfigureRoomLayoutView = function () {
     
     this.grid = function() {
+
         var counter = 0;
         console.log("in grid()...");
         // Grabs the number from the form in the height box
@@ -46,6 +47,12 @@ var ConfigureRoomLayoutView = function () {
     };
 
 	this.initialize = function() {
+        var survey = JSON.parse(localStorage.getItem("surveyQuestions"));
+        console.log("survey JSON is: ");
+        console.log("answer types:" + survey.answerTypes);
+        console.log("answer choices: " + survey.answerChoices);
+        console.log("questions: " + survey.questions);
+
 		// div wrapper for view, used to attach events
 		this.$el = $('<div/>');
 		//this.$el.on('keyup', '.search-key', this.findByName);
@@ -63,7 +70,7 @@ var ConfigureRoomLayoutView = function () {
         this.$el.on('click', '#generate-grid', this.grid);
 
         // button for generating grid from coords
-        this.$el.on('click', '#save-grid', save);
+        this.$el.on('click', '#save-grid', saveTest);
 
 		this.render();
 	};
@@ -123,8 +130,10 @@ var createClickableGrid = function(rows, cols, callback)
     return grid;
 };
 
-var save = function()
+var saveTest = function()
 {
+    // TODO: in this func we are actually going to save to DB along with survey
+
     var gridArray1 = new Array();
     var gridArray2 = new Array();
     // var table = document.getElementById('table');

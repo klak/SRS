@@ -35,16 +35,19 @@
 <script id="home-template" type="text/template">
     <div class="panel panel-default" style=" margin:0 auto;">
         <div class="panel-heading"><a data-toggle="modal" data-target="#myModal" class="pull-right">Login</a> 
-            <h4>Dr. Scofield Surey</h4></div>
+            <h4>Where Would You Sit?</h4></div>
             <div class="panel-body">
                 <div class="clearfix"></div>
+                <center>
                 <hr>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate.
-                Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis
-                dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan.
-                Aliquam in felis sit amet augue.
+                <h4>Welcome!</h4>
+                <hr>
+                If you are participating in this experiment, please click <strong>Start Survey</strong> below to begin. 
+                <hr>
+                Otherwise, if you are an experiment administrator, please click <strong>Log In</strong> in the top right to log in with your credentials for more options.
                 <hr>
                 <a href="#takeSurvey"><button class="btn btn-primary" style=" margin:0 auto;">Start Survey</button></a>
+                </center>
             </div>
         </div>
         
@@ -90,21 +93,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">SRS</a>
+                <a class="navbar-brand" href="#home">SRS</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#menu-toggle" id="menu-toggle">Dashboard</a></li>
-                    <li role="presentation" class="dropdown">
-                        <a id="drop5" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                        Profile
-                        <span class="caret"></span></a>
-                        <ul id="menu2" class="dropdown-menu" role="menu" aria-labelledby="drop5">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#home">Logout</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Settings</a></li>
-                    <li><a href="#">Help</a></li>
+
+                    <li><a href="#adminHome">Settings</a></li>
+                    <li><a href="#adminHome">Help</a></li>
+                    <li><a href="#home">Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -114,9 +111,10 @@
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <li class="sidebar-brand"><a href="#">Admin Dashboard</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
+                <li class="sidebar-brand"><a href="#adminHome">Admin Dashboard</a></li>
+                <li><a href="#adminHome">Admin Home</a></li>
+                <li><a href="#adminHome">Services</a></li>
+                <li><a href="#adminHome">Contact</a></li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -129,11 +127,11 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <h2>Setup Test Case</h2>
-                                <p><a class="btn btn-primary" href="#configureRoom" role="button">New Test Case</a></p>
+                                <p><a class="btn btn-primary" href="#configureSurvey" role="button">New Test Case</a></p>
                             </div>
                             <div class="col-lg-6">
                                 <h2>Export Active Test Data</h2>
-                                <p><a class="btn btn-primary" href="#" role="button">Export Data</a></p>
+                                <p><a class="btn btn-primary" href="#exportData" role="button">Export Data</a></p>
                             </div>
                         </div>
                     </div>
@@ -156,21 +154,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">SRS</a>
+                <a class="navbar-brand" href="#home">SRS</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#menu-toggle" id="menu-toggle">Dashboard</a></li>
-                    <li role="presentation" class="dropdown">
-                        <a id="drop5" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                        Profile
-                        <span class="caret"></span></a>
-                        <ul id="menu2" class="dropdown-menu" role="menu" aria-labelledby="drop5">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#home">Logout</a></li>
-                        </ul> 
-                    </li>
-                    <li><a href="#">Settings</a></li>
-                    <li><a href="#">Help</a></li>
+
+                    <li><a href="#adminHome">Settings</a></li>
+                    <li><a href="#adminHome">Help</a></li>
+                    <li><a href="#home">Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -180,9 +172,10 @@
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <li class="sidebar-brand"><a href="#">Admin Dashboard</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
+                <li class="sidebar-brand"><a href="#adminHome">Admin Dashboard</a></li>
+                <li><a href="#adminHome">Admin Home</a></li>
+                <li><a href="#adminHome">Services</a></li>
+                <li><a href="#adminHome">Contact</a></li>
             </ul>
         </div>
         <!-- #sidebar-wrapper -->
@@ -227,21 +220,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">SRS</a>
+                <a class="navbar-brand" href="#home">SRS</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#menu-toggle" id="menu-toggle">Dashboard</a></li>
-                    <li role="presentation" class="dropdown">
-                        <a id="drop5" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                        Profile
-                        <span class="caret"></span></a>
-                        <ul id="menu2" class="dropdown-menu" role="menu" aria-labelledby="drop5">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#home">Logout</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Settings</a></li>
-                    <li><a href="#">Help</a></li>
+                    <li><a href="#adminHome">Settings</a></li>
+                    <li><a href="#adminHome">Help</a></li>
+                    <li><a href="#home">Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -251,9 +237,10 @@
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <li class="sidebar-brand"><a href="#">Admin Dashboard</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
+                <li class="sidebar-brand"><a href="#adminHome">Admin Dashboard</a></li>
+                <li><a href="#adminHome">Admin Home</a></li>
+                <li><a href="#adminHome">Services</a></li>
+                <li><a href="#adminHome">Contact</a></li>
             </ul>
         </div>
         <!-- #sidebar-wrapper -->
@@ -295,21 +282,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">SRS</a>
+                <a class="navbar-brand" href="#home">SRS</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#menu-toggle" id="menu-toggle">Dashboard</a></li>
-                    <li role="presentation" class="dropdown">
-                        <a id="drop5" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                        Profile
-                        <span class="caret"></span></a>
-                        <ul id="menu2" class="dropdown-menu" role="menu" aria-labelledby="drop5">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#home">Logout</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Settings</a></li>
-                    <li><a href="#">Help</a></li>
+
+                    <li><a href="#adminHome">Settings</a></li>
+                    <li><a href="#adminHome">Help</a></li>
+                    <li><a href="#home">Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -319,9 +300,10 @@
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <li class="sidebar-brand"><a href="#">Admin Dashboard</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
+                <li class="sidebar-brand"><a href="#adminHome">Admin Dashboard</a></li>
+                <li><a href="#adminHome">Admin Home</a></li>
+                <li><a href="#adminHome">Services</a></li>
+                <li><a href="#adminHome">Contact</a></li>
             </ul>
         </div>
         <!-- #sidebar-wrapper -->
@@ -355,11 +337,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">SRS</a>
+                <a class="navbar-brand" href="#home">SRS</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Help</a></li>
+                    <li><a href="#home">Help</a></li>
                 </ul>
             </div>
         </div>
@@ -396,11 +378,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">SRS</a>
+                <a class="navbar-brand" href="#home">SRS</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Help</a></li>
+                    <li><a href="#home">Help</a></li>
                 </ul>
             </div>
         </div>
@@ -440,11 +422,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">SRS</a>
+                <a class="navbar-brand" href="#home">SRS</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Help</a></li>
+                    <li><a href="#home">Help</a></li>
                 </ul>
             </div>
         </div>

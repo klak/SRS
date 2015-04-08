@@ -14,11 +14,14 @@ var SelectChairView = function () {
                     var activeTest = tests[0];
                     //console.log("num tests:" + tests.length);
                     //console.log("test:" + JSON.stringify(activeTest));
-                    console.log("room height:" + activeTest.RoomLayout.height);
-                    console.log("room width:" + activeTest.RoomLayout.width);
-                    console.log("empty chairs" + activeTest.RoomLayout.emptyChairs);
-                    console.log("occupied chairs" + activeTest.RoomLayout.occupiedChairs);
-                    
+                    console.log("room height: " + activeTest.RoomLayout.height);
+                    console.log("room width: " + activeTest.RoomLayout.width);
+                    console.log("empty chairs: " + activeTest.RoomLayout.emptyChairs[0]);
+                    console.log("occupied chairs: " + activeTest.RoomLayout.occupiedChairs[0]);
+					
+					// NOTE: emptyChairs and occupiedChairs are both arrays of size 2 int arrays.
+					// The inner arrays are coords of a chair (e.g. [[0,2], [4,3]])
+					
                     // populate and display room here
                     renderRoom(activeTest.RoomLayout.height,
                                 activeTest.RoomLayout.width,
@@ -86,6 +89,12 @@ function generateGrid( rows, cols, empChairArray, occChairArray) {
             }
         }
     }
+	
+	//TODO: Figure out how to store entrance coords and load avatar starting on entrance
+	var l = grid.rows.length;
+	var entranceCell = grid.rows[l-1].cells[5];
+	entranceCell.className = 'entrance';
+	entranceCell.name = 'entrance';
 
     // add click listener for all the grid places
     $("#test-room").on('click', 'td',

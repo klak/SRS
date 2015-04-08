@@ -22,6 +22,10 @@
   background-color: none;
 }
 
+.grid td.entrance{
+  background-color: green;
+}
+
 img{
     width:33px; height:33px;
 }

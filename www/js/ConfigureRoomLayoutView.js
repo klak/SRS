@@ -28,10 +28,10 @@ var ConfigureRoomLayoutView = function () {
                         // Uses the class name to determine if the box has been clicked
                   
                         if (el.className == '') {
-                            el.className = 'clicked1';
-                        } else if (el.className == 'clicked1') {
-                            el.className = 'clicked2';
-                        } else if (el.className == 'clicked2') {
+                            el.className = 'unoccupied';
+                        } else if (el.className == 'unoccupied') {
+                            el.className = 'occupied';
+                        } else if (el.className == 'occupied') {
                             el.className = '';
                         }
                     }
@@ -148,14 +148,14 @@ var saveTest = function()
         for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
             console.log(table.rows[r].cells[c].className);
 
-            if (table.rows[r].cells[c].className == 'clicked1'){
+            if (table.rows[r].cells[c].className == 'unoccupied'){
               emptyChairIds.push(table.rows[r].cells[c].id);
               var tempTuple = [];
               tempTuple.push(r);
               tempTuple.push(c);
               emptyChairTuples.push(tempTuple);
             }
-            else if (table.rows[r].cells[c].className == 'clicked2'){
+            else if (table.rows[r].cells[c].className == 'occupied'){
               occupiedChairIds.push(table.rows[r].cells[c].id);
               var tempTuple = [];
               tempTuple.push(r);

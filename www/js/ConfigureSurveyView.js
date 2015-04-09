@@ -31,6 +31,13 @@ var ConfigureSurveyView = function () {
               saveSurvey();
           });
 
+      this.$el.on('click', ".btn-remove", 
+          function ()
+          {
+              countAnswers--;
+              $(this).parent('div').remove();
+          });
+
 		  this.render();
 	};
 
@@ -129,28 +136,28 @@ function addAllInputs(divName, inputType, questionBool) {
         switch(inputType) {
             case 'text':
                 newdiv.innerHTML = "</br>" + "<input type='text' id='q" 
-                + counterQuestion + "a" + countAnswers + "'>";
+                + counterQuestion + "a" + countAnswers + "'><button type='button' class='btn btn-xs btn-remove'>" + "<span class='glyphicon glyphicon-remove'>" +"</span></button>";
 
                 tempAnswerTypes[tempAnswerTypes.length] = "text";
                 countAnswers++;
                 break;
             case 'radio':
                 newdiv.innerHTML = "</br>" + "<input type='radio' >" 
-                + "<input text='text' id='q" + counterQuestion + "a" + countAnswers + "'>";
+                + "<input text='text' id='q" + counterQuestion + "a" + countAnswers + "'><button type='button' class='btn btn-xs btn-remove'>" + "<span class='glyphicon glyphicon-remove'>" +"</span></button>";
 
                 tempAnswerTypes[tempAnswerTypes.length] = "radio";
                 countAnswers++;
                 break;
             case 'checkbox':
                 newdiv.innerHTML = "</br>" + "<input type='checkbox' >" 
-                + "<input text='text' id='q" + counterQuestion + "a" + countAnswers + "'>";
+                + "<input text='text' id='q" + counterQuestion + "a" + countAnswers + "'><button type='button' class='btn btn-xs btn-remove'>" + "<span class='glyphicon glyphicon-remove'>" +"</span></button>";
 
                 tempAnswerTypes[tempAnswerTypes.length] = "checkbox";
                 countAnswers++;
                 break;
             case 'textarea':
                 newdiv.innerHTML = "</br>" + "<textarea id='q" + counterQuestion 
-                + "a" + countAnswers + "'>type here...</textarea>";
+                + "a" + countAnswers + "'>type here...</textarea><button type='button' class='btn btn-xs btn-remove'>" + "<span class='glyphicon glyphicon-remove'>" +"</span></button>";
 
                 tempAnswerTypes[tempAnswerTypes.length] = "textarea";
                 countAnswers++;

@@ -7,23 +7,41 @@
     font-family:sans-serif; font-size:13px
 }
 .grid td.clicked1 {
-    
     background-image: url("../img/empChair.png");
     background-size: 33px 33px;
 }
 
 .grid td.clicked2{
-  background-image: url("../img/occChair.png");
-  background-size: 33px 33px;
-
+	background-image: url("../img/occChair.png");
+	background-size: 33px 33px;
 }
 
 .grid td.clicked3{
-  background-color: none;
+	background-color: none;
 }
 
 .grid td.entrance{
-  background-color: green;
+	background-color: green;
+}
+
+.grid td.entranceWithAvatar{
+	background-color: green;
+	background-image: url("../img/avatar.jpg");
+	background-size: 33px 33px;
+}
+
+.grid td.blank {
+	background-image: none;
+}
+
+.grid td.blankWithAvatar{
+	background-image: url("../img/avatar.jpg");
+	background-size: 33px 33px;
+}
+
+.grid td.clicked1WithAvatar {
+	background-image: url("../img/avatar.jpg");
+	background-size: 33px 33px;
 }
 
 img{

@@ -1,3 +1,5 @@
+var avatarCoords = [0,0];
+
 var SelectChairView = function () {
 
 	  this.initialize = function() {
@@ -60,6 +62,8 @@ function generateGrid( rows, cols, empChairArray, occChairArray) {
 
     var grid = document.createElement('table');
     grid.className = 'grid';
+	grid.id = 'grid';
+	grid.name = 'bob';
 
     // creates the rows
     for (var r = 0; r < rows; ++r){
@@ -70,6 +74,7 @@ function generateGrid( rows, cols, empChairArray, occChairArray) {
             var cell = tr.appendChild(document.createElement('td'));
             // adds id to the cell
             cell.id = ++idCtr;
+			cell.className = 'blank';
 
             for (var x in empChairArray)
             {
@@ -91,9 +96,9 @@ function generateGrid( rows, cols, empChairArray, occChairArray) {
     }
 	
 	//TODO: Figure out how to store entrance coords and load avatar starting on entrance
-	var l = grid.rows.length;
-	var entranceCell = grid.rows[l-1].cells[5];
-	entranceCell.className = 'entrance';
+	avatarCoords[0] = rows-1;
+	var entranceCell = grid.rows[avatarCoords[0]].cells[avatarCoords[1]];
+	entranceCell.className = 'entranceWithAvatar';
 	entranceCell.name = 'entrance';
 
     // add click listener for all the grid places
@@ -108,6 +113,20 @@ function generateGrid( rows, cols, empChairArray, occChairArray) {
             window.location = "#thankyou";
         }
     );
+	
+	// Click listeners for directional buttons to move avatar
+	document.getElementById("left").addEventListener("click", function() {
+		moveAvatar('left');
+	});
+	document.getElementById("right").addEventListener("click", function() {
+		moveAvatar('right');
+	});
+	document.getElementById("down").addEventListener("click", function() {
+		moveAvatar('down');
+	});
+	document.getElementById("up").addEventListener("click", function() {
+		moveAvatar('up');
+	});
 
     return grid;
 }
@@ -146,6 +165,46 @@ function saveTestData(chairId)
       );
 
 
+}
+
+function moveAvatar(direction) {
+	// direction is a string passed in from html (up, down, left, right)
+	grid = document.getElementById('grid');
+	console.log("Move avatar " + direction);
+	console.log("Current avatarCoords: " + avatarCoords);
+	var tempAvatarCoords = [0,0];
+	tempAvatarCoords[0] = avatarCoords[0];
+	tempAvatarCoords[1] = avatarCoords[1];
+	
+	switch (direction) {
+		case 'up':
+			tempAvatarCoords[0]--;
+			break;
+		case 'down':
+			tempAvatarCoords[0]++;
+			break;
+		case 'left': 
+			tempAvatarCoords[1]--;
+			break;
+		case 'right':
+			tempAvatarCoords[1]++;
+			break;
+		default:
+			console.log("Invalid parameter to moveAvatar(direction)");
+	}
+	console.log("New avatarCoords: " + tempAvatarCoords);
+	
+	if (!(tempAvatarCoords[0] < 0 || tempAvatarCoords[0] > grid.rows.length-1 || tempAvatarCoords[1] < 0 || tempAvatarCoords[1] > grid.rows[0].cells.length-1)) {
+		var oldCell = grid.rows[avatarCoords[0]].cells[avatarCoords[1]];
+		var newCell = grid.rows[tempAvatarCoords[0]].cells[tempAvatarCoords[1]];
+		console.log("oldCell:" + oldCell.id + "   newCell: " + newCell.id);
+		if (newCell.className != 'clicked2') {
+			newCell.className += "WithAvatar";
+			oldCell.className = oldCell.className.replace('WithAvatar','');
+			avatarCoords = tempAvatarCoords;
+		}
+	}
+	else { console.log("Invalid avatar movement"); }
 }
 
 

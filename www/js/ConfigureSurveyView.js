@@ -31,6 +31,13 @@ var ConfigureSurveyView = function () {
               saveSurvey();
           });
 
+      /* 
+      / TODO: this does NOT work properly... we also need to delete the answer type
+      / from either tempAnswerTypes or answerTypes array.
+      / OR (the easier way) we can just only allow removing answers from the
+      / last question, by disabling the remove buttons on answers for questions
+      / other than the last question.
+      */
       this.$el.on('click', ".btn-remove", 
           function ()
           {

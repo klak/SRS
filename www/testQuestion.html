@@ -192,22 +192,22 @@ function addAllInputs(divName, inputType, questionBool){
      else{
           switch(inputType) {
                case 'text': 
-                    newdiv.innerHTML = "<br>" + "<input type='text' id='q" + counterQuestion + "a" + countAnswers + "'>"+"<button onclick='removeAns();' type='button' class='btn btn-xs'>" + "<span class='glyphicon glyphicon-remove'>" +"</span></button>"+ "<br/><br/>";
+                    newdiv.innerHTML = "<br>" + "<input type='text' id='q" + counterQuestion + "a" + countAnswers + "'>"+"<button onclick='removeAns('q" + counterQuestion + "a" + countAnswers + "');' type='button' class='btn btn-xs'>" + "<span class='glyphicon glyphicon-remove'>" +"</span></button>"+ "<br/><br/>";
                     tempAnswerTypes[tempAnswerTypes.length] = "text";
                     countAnswers++;
                     break;
                case 'radio':
-                    newdiv.innerHTML = "<br>" + "<input type='text' id='q" + counterQuestion + "a" + countAnswers + "'>"+"<button onclick='removeAns();' type='button' class='btn btn-xs'>" + "<span class='glyphicon glyphicon-remove'>" +"</span></button>"+ "<br/><br/>";
+                    newdiv.innerHTML = "<br>" + "<input type='radio' >" + "<input type='text' id='q" + counterQuestion + "a" + countAnswers + "'>"+"<button onclick='removeAns();' type='button' class='btn btn-xs'>" + "<span class='glyphicon glyphicon-remove'>" +"</span></button>"+ "<br/><br/>";
                     tempAnswerTypes[tempAnswerTypes.length] = "radio"; 
                     countAnswers++;                  
                     break;
                case 'checkbox':
-                    newdiv.innerHTML = "<br>" + "<input type='text' id='q" + counterQuestion + "a" + countAnswers + "'>"+"<button onclick='removeAns();' type='button' class='btn btn-xs'>" + "<span class='glyphicon glyphicon-remove'>" +"</span></button>"+ "<br/><br/>";
+                    newdiv.innerHTML = "<br>" + "<input type='checkbox' >" + "<input type='text' id='q" + counterQuestion + "a" + countAnswers + "'>"+"<button onclick='removeAns();' type='button' class='btn btn-xs'>" + "<span class='glyphicon glyphicon-remove'>" +"</span></button>"+ "<br/><br/>";
                     tempAnswerTypes[tempAnswerTypes.length] = "checkbox";
                     countAnswers++;
                     break;
                case 'textarea':
-                    newdiv.innerHTML = "<br>" + "<input type='text' id='q" + counterQuestion + "a" + countAnswers + "'>"+"<button onclick='removeAns();' type='button' class='btn btn-xs'>" + "<span class='glyphicon glyphicon-remove'>" +"</span></button>"+ "<br/><br/>";
+                    newdiv.innerHTML = "<br>" + "<input type='textarea' id='q" + counterQuestion + "a" + countAnswers + "'>"+"<button onclick='removeAns();' type='button' class='btn btn-xs'>" + "<span class='glyphicon glyphicon-remove'>" +"</span></button>"+ "<br/><br/>";
                     tempAnswerTypes[tempAnswerTypes.length] = "textarea";
                     countAnswers++;
                     break;
@@ -231,7 +231,8 @@ function addAllInputs(divName, inputType, questionBool){
 
 function removeAns(id){
   var elem = document.getElementById(id);
-  console.log(id);
+  //console.log(id);
+  //elem.parentNode.removeChild(elem);
   elem.remove();
 }
 

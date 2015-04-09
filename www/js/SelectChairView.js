@@ -1,41 +1,59 @@
 var avatarCoords = [0,0];
+var avatarCellId = "0";
 
 var SelectChairView = function () {
 
-	  this.initialize = function() {
+    this.initialize = function() {
 
-    		// div wrapper for view, used to attach events
-    		this.$el = $('<div/>');
+    	// div wrapper for view, used to attach events
+    	this.$el = $('<div/>');
 
         console.log("answers passed from survey are: " + localStorage.getItem("answerString"));
         
         // fetch grid from active test in db, populate and render grid
-        getDocsWithQuery("wwystest", "tests_dev", JSON.stringify({"activeFlag":"true"})).
-            then(
-                function(tests) {
-                    var activeTest = tests[0];
-                    //console.log("num tests:" + tests.length);
-                    //console.log("test:" + JSON.stringify(activeTest));
-                    console.log("room height: " + activeTest.RoomLayout.height);
-                    console.log("room width: " + activeTest.RoomLayout.width);
-                    console.log("empty chairs: " + activeTest.RoomLayout.emptyChairs[0]);
-                    console.log("occupied chairs: " + activeTest.RoomLayout.occupiedChairs[0]);
-					
-					// NOTE: emptyChairs and occupiedChairs are both arrays of size 2 int arrays.
-					// The inner arrays are coords of a chair (e.g. [[0,2], [4,3]])
-					
-                    // populate and display room here
-                    renderRoom(activeTest.RoomLayout.height,
-                                activeTest.RoomLayout.width,
-                                activeTest.RoomLayout.emptyChairs,
-                                activeTest.RoomLayout.occupiedChairs);
-                }
-            );
+        getDocsWithQuery("wwystest", "tests_dev", JSON.stringify({"activeFlag":"true"}))
+        .then(
+            function(tests) {
+                var activeTest = tests[0];
+                //console.log("num tests:" + tests.length);
+                //console.log("test:" + JSON.stringify(activeTest));
+                console.log("room height: " + activeTest.RoomLayout.height);
+                console.log("room width: " + activeTest.RoomLayout.width);
+                console.log("empty chairs: " + activeTest.RoomLayout.emptyChairs[0]);
+                console.log("occupied chairs: " + activeTest.RoomLayout.occupiedChairs[0]);
+				
+				// NOTE: emptyChairs and occupiedChairs are both arrays of size 2 int arrays.
+				// The inner arrays are coords of a chair (e.g. [[0,2], [4,3]])
+				
+                // populate and display room here
+                renderRoom(activeTest.RoomLayout.height,
+                            activeTest.RoomLayout.width,
+                            activeTest.RoomLayout.emptyChairs,
+                            activeTest.RoomLayout.occupiedChairs);
+            }
+        );
 
-    		this.render();
-	  };
+        $('#submit-selection').prop('disabled', true);
 
-	  this.render = function() {
+        // click listener for submit button -- alert and save to db on submit
+        this.$el.on('click', '#submit-selection', 
+            function ()
+            {
+                verifySelection(0, 0, avatarCellId);
+
+                // todo: this should save id to local storage instead of passing, maybe?
+                saveTestData(avatarCellId);
+                // and redirect to view for selecting chair
+                window.location = "#thankyou";
+            }
+        );
+
+		this.render();
+    };
+
+
+
+	this.render = function() {
         this.$el.html(this.template());
         return this;
     };
@@ -101,18 +119,7 @@ function generateGrid( rows, cols, empChairArray, occChairArray) {
 	entranceCell.className = 'entranceWithAvatar';
 	entranceCell.name = 'entrance';
 
-    // add click listener for all the grid places
-    $("#test-room").on('click', 'td',
-        function()
-        {
-            verifySelection(0, 0, $(this).attr('id'));
 
-            // todo: this should save id to local storage instead of passing, maybe?
-            saveTestData($(this).attr('id'));
-            // and redirect to view for selecting chair
-            window.location = "#thankyou";
-        }
-    );
 	
 	// Click listeners for directional buttons to move avatar
 	document.getElementById("left").addEventListener("click", function() {
@@ -198,11 +205,21 @@ function moveAvatar(direction) {
 		var oldCell = grid.rows[avatarCoords[0]].cells[avatarCoords[1]];
 		var newCell = grid.rows[tempAvatarCoords[0]].cells[tempAvatarCoords[1]];
 		console.log("oldCell:" + oldCell.id + "   newCell: " + newCell.id);
-		if (newCell.className != 'occupied') {
+		
+        if (newCell.className == "unoccupied") {
+            $('#submit-selection').prop('disabled', false);
+        } else {
+            $('#submit-selection').prop('disabled', true);
+        }
+
+        if (newCell.className != 'occupied') {
 			newCell.className += "WithAvatar";
 			oldCell.className = oldCell.className.replace('WithAvatar','');
 			avatarCoords = tempAvatarCoords;
+            avatarCellId = newCell.id;
 		}
+
+
 	}
 	else { console.log("Invalid avatar movement"); }
 }

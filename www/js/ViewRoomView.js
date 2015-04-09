@@ -88,12 +88,12 @@ var ViewRoomView = function () {
                   //cell.innerHTML = ++i;
                   cell.id = ++i;
                   if(cell.id == empChairArray[0]){
-                    cell.className = 'clicked1';
+                    cell.className = 'unoccupied';
                     empChairArray.shift();
                   }
 
                   else if(cell.id == occChairArray[0]){
-                    cell.className = 'clicked2';
+                    cell.className = 'occupied';
                     occChairArray.shift();
                   }
 

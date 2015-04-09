@@ -80,7 +80,7 @@ function generateGrid( rows, cols, empChairArray, occChairArray) {
             {
                 if (r == empChairArray[x][0] && c == empChairArray[x][1])
                 {
-                    cell.className = 'clicked1';
+                    cell.className = 'unoccupied';
                     console.log()
                 }
             }
@@ -89,7 +89,7 @@ function generateGrid( rows, cols, empChairArray, occChairArray) {
             {
                 if (r == occChairArray[x][0] && c == occChairArray[x][1])
                 {
-                    cell.className = 'clicked2';
+                    cell.className = 'occupied';
                 }
             }
         }
@@ -198,7 +198,7 @@ function moveAvatar(direction) {
 		var oldCell = grid.rows[avatarCoords[0]].cells[avatarCoords[1]];
 		var newCell = grid.rows[tempAvatarCoords[0]].cells[tempAvatarCoords[1]];
 		console.log("oldCell:" + oldCell.id + "   newCell: " + newCell.id);
-		if (newCell.className != 'clicked2') {
+		if (newCell.className != 'occupied') {
 			newCell.className += "WithAvatar";
 			oldCell.className = oldCell.className.replace('WithAvatar','');
 			avatarCoords = tempAvatarCoords;

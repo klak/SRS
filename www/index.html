@@ -133,6 +133,10 @@
                                 <h2>Export Active Test Data</h2>
                                 <p><a class="btn btn-primary" href="#exportData" role="button">Export Data</a></p>
                             </div>
+                            <div class="col-lg-6">
+                                <h2>Manage Tests</h2>
+                                <p><a class="btn btn-primary" href="#manageTests" role="button">Manage Tests</a></p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -142,6 +146,122 @@
     </div>
     <!-- /#wrapper -->
 </script> <!-- end admin home template -->
+
+<!-- template for export data page -->
+<script id="export-data-template" type="text/template">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#home">SRS</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#menu-toggle" id="menu-toggle">Dashboard</a></li>
+
+                    <li><a href="#adminHome">Settings</a></li>
+                    <li><a href="#adminHome">Help</a></li>
+                    <li><a href="#home">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="wrapper" class="">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand"><a href="#adminHome">Admin Dashboard</a></li>
+                <li><a href="#adminHome">Admin Home</a></li>
+                <li><a href="#adminHome">Services</a></li>
+                <li><a href="#adminHome">Contact</a></li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h2>Export Data</h2>
+                                <h4>This functionality has not been built yet.</h4>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+</script> <!-- end export data template -->
+
+<!-- template for managing tests page -->
+<script id="manage-tests-template" type="text/template">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#home">SRS</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#menu-toggle" id="menu-toggle">Dashboard</a></li>
+
+                    <li><a href="#adminHome">Settings</a></li>
+                    <li><a href="#adminHome">Help</a></li>
+                    <li><a href="#home">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="wrapper" class="">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand"><a href="#adminHome">Admin Dashboard</a></li>
+                <li><a href="#adminHome">Admin Home</a></li>
+                <li><a href="#adminHome">Services</a></li>
+                <li><a href="#adminHome">Contact</a></li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h2>Manage Tests</h2>
+                                <h4>This functionality has not been built yet.</h4>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+</script> <!-- end view manage tests template -->
 
 <!-- configure room template -->
 <script id="configure-room-template" type="text/template">
@@ -455,6 +575,8 @@
 <!-- js files for views -->
 <script src="js/HomeView.js"></script>
 <script src="js/AdminHomeView.js"></script>
+<script src="js/ExportDataView.js"></script>
+<script src="js/ManageTestsView.js"></script>
 <script src="js/ConfigureRoomLayoutView.js"></script>
 <script src="js/ConfigureSurveyView.js"></script>
 <script src="js/ViewRoomView.js"></script>

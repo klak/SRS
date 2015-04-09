@@ -5,6 +5,8 @@
     
     HomeView.prototype.template = Handlebars.compile($("#home-template").html());
     AdminHomeView.prototype.template = Handlebars.compile($("#admin-home-template").html());
+    ExportDataView.prototype.template = Handlebars.compile($("#export-data-template").html());
+    ManageTestsView.prototype.template = Handlebars.compile($("#manage-tests-template").html());
     ConfigureRoomLayoutView.prototype.template = Handlebars.compile($("#configure-room-template").html());
     ConfigureSurveyView.prototype.template = Handlebars.compile($("#configure-survey-template").html());
     ViewRoomView.prototype.template = Handlebars.compile($("#view-room-template").html());
@@ -22,6 +24,14 @@
 
     router.addRoute('adminHome', function(){
         $('body').html(new AdminHomeView().render().$el);
+    });
+
+    router.addRoute('exportData', function() {
+        $('body').html(new ExportDataView().render().$el);
+    });
+
+    router.addRoute('manageTests', function() {
+        $('body').html(new ManageTestsView().render().$el);
     });
 
     router.addRoute('configureRoom', function(){

@@ -11,11 +11,26 @@ var ManageTestsView = function () {
                 {
                     var testDiv = document.createElement('div');
                     //testDiv.id = tests[x]._id.$oid;
+                    testDiv.className = "panel panel-default";
 
                     var testHtml = "";
-                    testHtml += "Test ID: " + tests[x]._id.$oid + "\n<br>\n";
-                    testHtml += "<p>Active: " + tests[x].activeFlag + "</p>";
+
+                    testHtml += "<div class='panel-heading'>Test ID: " + tests[x]._id.$oid 
+                            
+                    if (tests[x].activeFlag == "true")
+                    {
+                        testHtml += "    <span class='label label-success'>ACTIVE</span>";
+                    } else 
+                    {
+                        testHtml += "<span class='label label-default'>INACTIVE</span>"
+                    }
+
+                    testHtml += "</div>";
+
+
+                    //testHtml += "<div class='panel-body'><p>Active: " + tests[x].activeFlag + "</p>";
                     
+                    testHtml += "<div class='panel-body'>";
                     var testQuestions = tests[x].surveyQuestions.questions;
                     var questionNum = 1;
                     for (var i in testQuestions)
@@ -24,9 +39,8 @@ var ManageTestsView = function () {
                         questionNum++;
                     }
 
-                    testHtml += "<button class='activate-test' id='" 
-                                + tests[x]._id.$oid + "'>Activate This Test</button>";
-                    testHtml += "<br><br>";
+                    testHtml += "<button class='btn btn-success activate-test' id='" 
+                                + tests[x]._id.$oid + "'>Activate This Test</button></div>";
 
                     testDiv.innerHTML = testHtml;
                     document.getElementById("list-tests").appendChild(testDiv);

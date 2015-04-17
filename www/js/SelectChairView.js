@@ -160,6 +160,7 @@ function saveTestData(chairId)
 
     // build up our result object to send to the database
     var result = new Object();
+    result.testId = localStorage.getItem("activeTestId");
     result.surveyAnswers = answers;
     result.chairChoice = chairId;
 

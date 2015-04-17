@@ -36,6 +36,7 @@ var TakeSurveyView = function() {
                 
                     // populate question and answers into html here.
                     populateQuestions(activeTest, 'survey');
+                    localStorage.setItem("activeTestId", activeTest._id.$oid);
                 }
             );
 

@@ -1,5 +1,6 @@
 var avatarCoords = [0,0];
 var avatarCellId = "0";
+var entranceCell;
 
 var SelectChairView = function () {
 
@@ -115,7 +116,7 @@ function generateGrid( rows, cols, empChairArray, occChairArray) {
 	
 	//TODO: Figure out how to store entrance coords and load avatar starting on entrance
 	avatarCoords[0] = rows-1;
-	var entranceCell = grid.rows[avatarCoords[0]].cells[avatarCoords[1]];
+	entranceCell = grid.rows[avatarCoords[0]].cells[avatarCoords[1]];
 	entranceCell.className = 'entranceWithAvatar';
 	entranceCell.name = 'entrance';
 
@@ -133,6 +134,11 @@ function generateGrid( rows, cols, empChairArray, occChairArray) {
 	});
 	document.getElementById("up").addEventListener("click", function() {
 		moveAvatar('up');
+	});
+	
+	// Click listener for reset button
+	document.getElementById("reset").addEventListener("click", function() {
+		resetAvatar();
 	});
 
     return grid;
@@ -222,6 +228,10 @@ function moveAvatar(direction) {
 
 	}
 	else { console.log("Invalid avatar movement"); }
+}
+
+function resetAvatar() {
+	// Reset avatar to location of entranceCell
 }
 
 

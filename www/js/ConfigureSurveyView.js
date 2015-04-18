@@ -4,46 +4,54 @@ var ConfigureSurveyView = function () {
 	this.initialize = function() {
 		  // div wrapper for view, used to attach events
 		  this.$el = $('<div/>');
- 
+      countAnswers = 0;
+      countQuestion = 0;
+      questionsArray = [];
+      answerTypesArray = [];
+      tempAnswerTypes = [];
+      answerChoicesArray = [];
+      numberArr = []; // Contains the number of answer choices per question.
+
+      firstQuest = true
+      answerBool  = false;
+      inputType = "";
+
       // enable show/hide dashboard
       this.$el.on('click', '#menu-toggle', 
           function(e) {
               console.log("test");
               e.preventDefault();
               $("#wrapper", this.$el).toggleClass("toggled");
-          });
+          }
+      );
 
       this.$el.on('click', '#question', 
           function ()
           {
               addAllInputsHelper('dynamicInputs', 'text', true);
-          });
+          }
+      );
 
       this.$el.on('click', '#answer', 
           function()
           {
               addAllInputs('dynamicInputs', document.myForm.inputSelect.value, false);
-          });
+          }
+      );
 
       this.$el.on('click', "#finish", 
           function ()
           {
               saveSurvey();
-          });
+          }
+      );
 
-      /* 
-      / TODO: this does NOT work properly... we also need to delete the answer type
-      / from either tempAnswerTypes or answerTypes array.
-      / OR (the easier way) we can just only allow removing answers from the
-      / last question, by disabling the remove buttons on answers for questions
-      / other than the last question.
-      */
       this.$el.on('click', ".btn-remove", 
           function ()
           {
-              countAnswers--;
-              $(this).parent('div').remove();
-          });
+              removeAnswerChoice($(this));
+          }
+      );
 
 		  this.render();
 	};
@@ -86,6 +94,54 @@ function selectInputType() {
         case 'textarea':
           return 'textarea';
     }
+}
+
+function removeAnswerChoice(removeButton) // passed the remove button for the answer to remove
+{
+    var btnId = $(removeButton).attr("id");
+    console.log(btnId);
+
+    var questionNum = parseInt(btnId.substring(8,9));
+    var answerNum = parseInt(btnId.substring(10,11));
+
+    if (questionNum == counterQuestion) // we are on the latest question
+    {
+        // remove item answerNum from tempAnswerTypes
+        tempAnswerTypes.splice(answerNum, 1);
+        countAnswers--;
+        console.log("removing from latest question answer option " + answerNum)
+    } else // if this is not the latest question, we have to adjust a bunch of things
+    {
+        console.log("removing from question num " + questionNum + " answer number " + answerNum);
+
+        // remove item answerNum from answerTypes[questionNum-1]
+        console.log("answertypes array at questNum-1 was:    " + answerTypesArray[questionNum]);
+        answerTypesArray[questionNum].splice(answerNum, 1)
+        console.log("answertypes array at questNum-1 is now: " + answerTypesArray[questionNum]);
+
+        // reset id's of later answer choices -- lower the answer numbers in the id's
+        for (var i = answerNum+1; i <= numberArr[questionNum-1] - 1; i++)
+        {
+            console.log("going to reset id q" + questionNum + "a" + i);
+            var newAnswerNum = i - 1;
+            console.log("to q" + questionNum + "a" + newAnswerNum);
+
+            // update id for both answer div itself and the remove button!
+            var oldId = "q" + questionNum + "a" + i;
+            var newId = "q" + questionNum + "a" + newAnswerNum;
+            var answerDiv = document.getElementById(oldId);
+            answerDiv.id = newId;
+
+            var oldRemBtn = document.getElementById("remove-" + oldId);
+            oldRemBtn.id = "remove-" + newId; 
+        }
+
+        numberArr[questionNum-1]--; 
+    }
+
+    // finally, remove the visible answer div itself
+    $(removeButton).parent('div').remove();
+
 }
 
 function newAnswerHelper() {
@@ -132,39 +188,43 @@ function addAllInputs(divName, inputType, questionBool) {
               countAnswers = 0;
               firstQuest = false;
               answerBool = false;
+          } else { // Sends an alert if a question is tried to be made and doesn't have an answer option
+              alert("Please add at least one answer choice to the question.");
           }
-          // Sends an alert if a question is tried to be made and doesn't have an answer option
-          else {
-              alert("please add a way to answer the question");
-          }
-    }
-
-    else {
+    } else {
         switch(inputType) {
             case 'text':
                 newdiv.innerHTML = "</br>" + "<input type='text' id='q" 
-                + counterQuestion + "a" + countAnswers + "'><button type='button' class='btn btn-xs btn-remove'>" + "<span class='glyphicon glyphicon-remove'>" +"</span></button>";
+                + counterQuestion + "a" + countAnswers + "'><button type='button' id='remove-q" 
+                + counterQuestion + "a" + countAnswers + "' class='btn btn-xs btn-remove'>" 
+                + "<span class='glyphicon glyphicon-remove'>" +"</span></button>";
 
                 tempAnswerTypes[tempAnswerTypes.length] = "text";
                 countAnswers++;
                 break;
             case 'radio':
                 newdiv.innerHTML = "</br>" + "<input type='radio' >" 
-                + "<input text='text' id='q" + counterQuestion + "a" + countAnswers + "'><button type='button' class='btn btn-xs btn-remove'>" + "<span class='glyphicon glyphicon-remove'>" +"</span></button>";
+                + "<input text='text' id='q" + counterQuestion + "a" + countAnswers + "'><button type='button' id='remove-q" 
+                + counterQuestion + "a" + countAnswers + "' class='btn btn-xs btn-remove'>" 
+                + "<span class='glyphicon glyphicon-remove'>" +"</span></button>";
 
                 tempAnswerTypes[tempAnswerTypes.length] = "radio";
                 countAnswers++;
                 break;
             case 'checkbox':
                 newdiv.innerHTML = "</br>" + "<input type='checkbox' >" 
-                + "<input text='text' id='q" + counterQuestion + "a" + countAnswers + "'><button type='button' class='btn btn-xs btn-remove'>" + "<span class='glyphicon glyphicon-remove'>" +"</span></button>";
+                + "<input text='text' id='q" + counterQuestion + "a" + countAnswers + "'><button type='button' id='remove-q" 
+                + counterQuestion + "a" + countAnswers + "' class='btn btn-xs btn-remove'>" 
+                + "<span class='glyphicon glyphicon-remove'>" +"</span></button>";
 
                 tempAnswerTypes[tempAnswerTypes.length] = "checkbox";
                 countAnswers++;
                 break;
             case 'textarea':
                 newdiv.innerHTML = "</br>" + "<textarea id='q" + counterQuestion 
-                + "a" + countAnswers + "'>type here...</textarea><button type='button' class='btn btn-xs btn-remove'>" + "<span class='glyphicon glyphicon-remove'>" +"</span></button>";
+                + "a" + countAnswers + "'>type here...</textarea><button type='button' id='remove-q" 
+                + counterQuestion + "a" + countAnswers + "' class='btn btn-xs btn-remove'>" 
+                + "<span class='glyphicon glyphicon-remove'>" +"</span></button>";
 
                 tempAnswerTypes[tempAnswerTypes.length] = "textarea";
                 countAnswers++;
@@ -179,6 +239,7 @@ function addAllInputs(divName, inputType, questionBool) {
         answer.disabled = false;
     }
 
+    console.log("count answers is: " + countAnswers);
     document.getElementById(divName).appendChild(newdiv);
     console.log(document.getElementById("newDiv0").value);
 }
@@ -193,6 +254,7 @@ function saveSurvey()
     //console.log(numberArr);
     for(i = 0; i < counterQuestion; i++)
     {
+        console.log("question " + i + " has " + tempNum + " answers")
         var tempAnswerChoicesArray = [];
         var tempNum = numberArr.shift();
         console.log("temp num is: " + tempNum);

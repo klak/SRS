@@ -1,6 +1,8 @@
 var avatarCoords = [0,0];
 var avatarCellId = "0";
 var entranceCell;
+var entranceCellCoords = [0,0];
+
 
 var SelectChairView = function () {
 

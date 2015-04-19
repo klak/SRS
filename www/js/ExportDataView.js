@@ -150,7 +150,7 @@ function exportAllTests()
 
 function exportResultsByTestId() 
 {
-    var testId = document.getElementById("testId").value.toLowerCase();
+    var testId = document.getElementById("testId").value.toLowerCase().trim();
     getDocsWithQuery("wwystest", "results_dev", JSON.stringify({"testId":testId}))
     .then(
         function(results) {

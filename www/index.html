@@ -41,11 +41,8 @@
                 <div class="clearfix"></div>
                 <center>
                 <hr>
-                <h4>Welcome!</h4>
-                <hr>
-                If you are participating in this experiment, please click <strong>Start Survey</strong> below to begin. 
-                <hr>
-                Otherwise, if you are an experiment administrator, please click <strong>Log In</strong> in the top right to log in with your credentials for more options.
+                <h2>Welcome!</h2>
+                <h3>If you are participating in this experiment, please click <strong>Start Survey</strong> below to begin. </h3>
                 <hr>
                 <a href="#takeSurvey"><button class="btn btn-primary" style=" margin:0 auto;">Start Survey</button></a>
                 </center>
@@ -264,9 +261,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="row">
-                            <div class="col-lg-6">
-                                <h2>Manage Tests</h2>
-                            </div>
+                            <h2>Manage Tests</h2>
                             <div id="list-tests">
                                 <!-- list of tests will go here -->
                             </div>
@@ -478,7 +473,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#home">Help</a></li>
+                    <li><a data-toggle="modal" data-target="#helpModal1" class="pull-right">Help</a></li>
                 </ul>
             </div>
         </div>
@@ -491,8 +486,8 @@
             <form id="survey-form">
                 <div id="survey">
                 </div>
-
-                <a href="#selectChair"><input type="submit" id="submit-survey" value="Submit"></a>
+                <button
+                <button type="submit" class="btn btn-default" id="submit-survey">Next<a href "#selectChair"></a></button>
             </form>
 
             </br>
@@ -500,6 +495,23 @@
 
         </div>
     </center>
+
+<!-- Modal -->
+<div class="modal fade" id="helpModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">Help</h3>
+      </div>
+      <div class="modal-body">
+        <p>In this section of the survey please answer the questions that are below. When finished please click next. </p>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
 
 </script>
 <!-- end take survey template -->
@@ -519,7 +531,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#home">Help</a></li>
+                    <li><a data-toggle="modal" data-target="#helpModal2" class="pull-right">Help</a></li>
                 </ul>
             </div>
         </div>
@@ -536,21 +548,43 @@
                 </div>
             </div>
 			<div>
-				<button type="button" id="up">Up</button>
+				<button class="btn btn-primary" type="button" id="up"><span class="glyphicon glyphicon-menu-up"></span></button>
+			</div>
+            <br>
+			<div>
+				<button class="btn btn-primary" type="button" id="left"><span class="glyphicon glyphicon-menu-left"></span></button>
+				<button class="btn btn-primary" type="button" id="down"><span class="glyphicon glyphicon-menu-down"></span></button>
+				<button class="btn btn-primary" type="button" id="right"><span class="glyphicon glyphicon-menu-right"></span></button>
 			</div>
 			<div>
-				<button type="button" id="left">Left</button>
-				<button type="button" id="down">Down</button>
-				<button type="button" id="right">Right</button>
+				<!--//<button type="button" id="reset">Reset</button>-->
 			</div>
+            <br>
+            <br>
 			<div>
-				<button type="button" id="reset">Reset</button>
-			</div>
-			<div>
-				<button type="button" id="submit-selection" disabled>Submit</button>
+				<button class ="btn btn-success" type="button" id="submit-selection" disabled>Submit</button>
 			</div>
         </div>
     </center>
+
+<!-- Modal -->
+<div class="modal fade" id="helpModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">Help</h3>
+      </div>
+      <div class="modal-body">
+        <p>In this section of the survey please use the buttons below to move the character to open seat of your choosing. After the character is over the seat please click the submit button.</p>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+
 </script>
 <!-- end select chair template -->
 
@@ -569,7 +603,6 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#home">Help</a></li>
                 </ul>
             </div>
         </div>

@@ -1,7 +1,7 @@
 .grid { margin:1em auto; border-collapse:collapse }
 .grid td {
     cursor:pointer;
-    width:30px; height:30px;
+    width:50px; height:50px;
     border:1px solid #ccc;
     text-align:center;
     font-family:sans-serif; font-size:13px
@@ -14,7 +14,7 @@
 .grid td.entranceWithAvatar{
 	background-color: green;
 	background-image: url("../img/avatar.jpg");
-	background-size: 33px 33px;
+	background-size: 50px 50px;
 }
 
 .grid td.blank {
@@ -23,24 +23,24 @@
 
 .grid td.blankWithAvatar{
 	background-image: url("../img/avatar.jpg");
-	background-size: 33px 33px;
+	background-size: 50px 50px;
 }
 
 .grid td.unoccupied {
     background-image: url("../img/empChair.png");
-    background-size: 33px 33px;
+    background-size: 50px 50px;
 }
 
 .grid td.unoccupiedWithAvatar {
 	background-image: url("../img/avatar.jpg");
-	background-size: 33px 33px;
+	background-size: 50px 50px;
 }
 
 .grid td.occupied{
 	background-image: url("../img/occChair.png");
-	background-size: 33px 33px;
+	background-size: 50px 50px;
 }
 
 img{
-    width:33px; height:33px;
+    width:50px; height:50px;
 }

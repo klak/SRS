@@ -139,10 +139,10 @@ function generateGrid( rows, cols, empChairArray, occChairArray) {
 	});
 	
 	// Click listener for reset button
-	document.getElementById("reset").addEventListener("click", function() {
+	/*document.getElementById("reset").addEventListener("click", function() {
 		resetAvatar();
 	});
-
+*/
     return grid;
 }
 

@@ -543,26 +543,30 @@
                 <div class="row">
                     <h1>Where Would You Sit?</h1>
                 </div>
-                <div id="test-room">
-                    <!-- grid goes here -->
+				<div class="row">
+					<div class="col-xs-6 col-md-4">
+						<div class="well" id="controls" data-spy="affix" style="width:25%;">
+							<!-- intstructions and arrow buttons go here -->
+							<p style="font-size:14pt;"> 
+							In this section of the survey please use the buttons below to move the character to open seat of your choosing. After the character is over the seat please click the submit button.
+							</p>
+							<br><br>
+							<button class="btn btn-primary" type="button" id="up"><span class="glyphicon glyphicon-menu-up"></span></button>
+							<br>
+							<button class="btn btn-primary" type="button" id="left"><span class="glyphicon glyphicon-menu-left"></span></button>
+							<button class="btn btn-primary" type="button" id="down"><span class="glyphicon glyphicon-menu-down"></span></button>
+							<button class="btn btn-primary" type="button" id="right"><span class="glyphicon glyphicon-menu-right"></span></button>
+							<br><br>
+							<button class ="btn btn-success" type="button" id="submit-selection" disabled>Submit</button>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-8" id="test-room">
+						<!-- grid goes here -->
+					</div>
                 </div>
             </div>
 			<div>
-				<button class="btn btn-primary" type="button" id="up"><span class="glyphicon glyphicon-menu-up"></span></button>
-			</div>
-            <br>
-			<div>
-				<button class="btn btn-primary" type="button" id="left"><span class="glyphicon glyphicon-menu-left"></span></button>
-				<button class="btn btn-primary" type="button" id="down"><span class="glyphicon glyphicon-menu-down"></span></button>
-				<button class="btn btn-primary" type="button" id="right"><span class="glyphicon glyphicon-menu-right"></span></button>
-			</div>
-			<div>
 				<!--//<button type="button" id="reset">Reset</button>-->
-			</div>
-            <br>
-            <br>
-			<div>
-				<button class ="btn btn-success" type="button" id="submit-selection" disabled>Submit</button>
 			</div>
         </div>
     </center>

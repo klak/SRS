@@ -174,8 +174,10 @@ function addAllInputs(divName, inputType, questionBool) {
           
           // Ensures that no question is added without an answer option
           if (firstQuest == true || answerBool == true) {
-              var htmlString = "</br>(" + (counterQuestion + 1) + ") " + "<input id='newDiv" 
-              + counterQuestion + "' type='text' name='myInputs[]'>";
+              var htmlString = "<hr><div class='input-group'>" 
+              htmlString += "<div class='input-group-addon'>" + (counterQuestion+ 1) + "</div>"
+              htmlString += "<input id='newDiv" 
+              + counterQuestion + "' class='form-control' type='text' name='myInputs[]' placeholder='Question " + (counterQuestion+1) + "'></div>";
               console.log(htmlString);
 
               newdiv.innerHTML = htmlString;
@@ -194,38 +196,40 @@ function addAllInputs(divName, inputType, questionBool) {
     } else {
         switch(inputType) {
             case 'text':
-                newdiv.innerHTML = "</br>" + "<input type='text' id='q" 
-                + counterQuestion + "a" + countAnswers + "'><button type='button' id='remove-q" 
-                + counterQuestion + "a" + countAnswers + "' class='btn btn-xs btn-remove'>" 
-                + "<span class='glyphicon glyphicon-remove'>" +"</span></button>";
+                newdiv.innerHTML = "<div class='input-group'>" + "<input class='form-control' type='text' id='q" 
+                + counterQuestion + "a" + countAnswers + "' placeholder='Answer " + (countAnswers+1) + "'>"
+                + "<div id='remove-q" + counterQuestion + "a" + countAnswers 
+                + "' class='btn-remove input-group-addon'>" 
+                + "<span class='glyphicon glyphicon-remove'></span></div></div>";
+
 
                 tempAnswerTypes[tempAnswerTypes.length] = "text";
                 countAnswers++;
                 break;
             case 'radio':
-                newdiv.innerHTML = "</br>" + "<input type='radio' >" 
-                + "<input text='text' id='q" + counterQuestion + "a" + countAnswers + "'><button type='button' id='remove-q" 
-                + counterQuestion + "a" + countAnswers + "' class='btn btn-xs btn-remove'>" 
-                + "<span class='glyphicon glyphicon-remove'>" +"</span></button>";
+                newdiv.innerHTML = "<div class='input-group'>" + "<div class='input-group-addon'><input class='radio-inline' type='radio'></div>" 
+                + "<input class='form-control text-inline' type='text' id='q" + counterQuestion + "a" + countAnswers + "' placeholder='Answer" + (countAnswers+1) +"'><div id='remove-q" 
+                + counterQuestion + "a" + countAnswers + "' class='btn-remove input-group-addon'>" 
+                + "<span class='glyphicon glyphicon-remove'>" +"</span></div></div>";
 
                 tempAnswerTypes[tempAnswerTypes.length] = "radio";
                 countAnswers++;
                 break;
             case 'checkbox':
-                newdiv.innerHTML = "</br>" + "<input type='checkbox' >" 
-                + "<input text='text' id='q" + counterQuestion + "a" + countAnswers + "'><button type='button' id='remove-q" 
-                + counterQuestion + "a" + countAnswers + "' class='btn btn-xs btn-remove'>" 
-                + "<span class='glyphicon glyphicon-remove'>" +"</span></button>";
+                newdiv.innerHTML = "<div class='input-group'>" + "<div class='input-group-addon'><input class='checkbox-inline' type='checkbox'></div>" 
+                + "<input class='form-control text-inline' type='text' id='q" + counterQuestion + "a" + countAnswers + "' placeholder='Answer" + (countAnswers+1) +"'><div id='remove-q" 
+                + counterQuestion + "a" + countAnswers + "' class='btn-remove input-group-addon'>" 
+                + "<span class='glyphicon glyphicon-remove'>" +"</span></div></div>";
 
                 tempAnswerTypes[tempAnswerTypes.length] = "checkbox";
                 countAnswers++;
                 break;
             case 'textarea':
-                newdiv.innerHTML = "</br>" + "<textarea id='q" + counterQuestion 
-                + "a" + countAnswers + "'>type here...</textarea><button type='button' id='remove-q" 
-                + counterQuestion + "a" + countAnswers + "' class='btn btn-xs btn-remove'>" 
-                + "<span class='glyphicon glyphicon-remove'>" +"</span></button>";
-
+                newdiv.innerHTML = "<div class='input-group'>" + "<input class='form-control' type='textarea' id='q" 
+                + counterQuestion + "a" + countAnswers + "' placeholder='Answer " + (countAnswers+1) + "'>"
+                + "<div id='remove-q" + counterQuestion + "a" + countAnswers 
+                + "' class='btn-remove input-group-addon'>" 
+                + "<span class='glyphicon glyphicon-remove'></span></div></div>";
                 tempAnswerTypes[tempAnswerTypes.length] = "textarea";
                 countAnswers++;
                 break;

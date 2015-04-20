@@ -39,7 +39,7 @@ var ManageTestsView = function () {
                         questionNum++;
                     }
 
-                    testHtml += "<button class='btn btn-success activate-test' id='" 
+                    testHtml += "<button class='btn btn-primary activate-test' id='" 
                                 + tests[x]._id.$oid + "'>Activate This Test</button></div>";
 
                     testDiv.innerHTML = testHtml;

@@ -98,7 +98,7 @@
                     <li><a href="#menu-toggle" id="menu-toggle">Dashboard</a></li>
 
                     <li><a href="#adminHome">Settings</a></li>
-                    <li><a href="#adminHome">Help</a></li>
+                    <li><a href="#">Help</a></li>
                     <li><a href="#home">Logout</a></li>
                 </ul>
             </div>
@@ -111,8 +111,9 @@
             <ul class="sidebar-nav">
                 <li class="sidebar-brand"><a href="#adminHome">Admin Dashboard</a></li>
                 <li><a href="#adminHome">Admin Home</a></li>
-                <li><a href="#adminHome">Services</a></li>
-                <li><a href="#adminHome">Contact</a></li>
+                <li><a href="#configureSurvey">Create New Test</a></li>
+                <li><a href="#manageTests">Manage Tests</a></li>
+                <li><a href="#exportData">Export Data</a></li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -176,8 +177,9 @@
             <ul class="sidebar-nav">
                 <li class="sidebar-brand"><a href="#adminHome">Admin Dashboard</a></li>
                 <li><a href="#adminHome">Admin Home</a></li>
-                <li><a href="#adminHome">Services</a></li>
-                <li><a href="#adminHome">Contact</a></li>
+                <li><a href="#configureSurvey">Create New Test</a></li>
+                <li><a href="#manageTests">Manage Tests</a></li>
+                <li><a href="#exportData">Export Data</a></li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -192,12 +194,12 @@
 
                             <div class="form-group">
                                 <h2>Export All Results</h2>
-                                <button class="btn btn-success" id="export-all-results">Export All Results</button>
+                                <button class="btn btn-primary" id="export-all-results">Export All Results</button>
                             </div>
 
                             <div class="form-group">
                                 <h2>Export All Tests</h2>
-                                <button class="btn btn-success" id="export-all-tests">Export All Tests</button>
+                                <button class="btn btn-primary" id="export-all-tests">Export All Tests</button>
                             </div>
 
                             <div class="form-group">
@@ -205,7 +207,7 @@
                                 <label for="testId">Enter a test ID on which to search:</label>
                                 <input type="text" class="form-control" id="testId"></input>
                             </div>
-                            <button class="btn btn-success" id="export-by-test-id">Export</button>
+                            <button class="btn btn-primary" id="export-by-test-id">Export</button>
 
                             </div>
                         </div>
@@ -249,8 +251,9 @@
             <ul class="sidebar-nav">
                 <li class="sidebar-brand"><a href="#adminHome">Admin Dashboard</a></li>
                 <li><a href="#adminHome">Admin Home</a></li>
-                <li><a href="#adminHome">Services</a></li>
-                <li><a href="#adminHome">Contact</a></li>
+                <li><a href="#configureSurvey">Create New Test</a></li>
+                <li><a href="#manageTests">Manage Tests</a></li>
+                <li><a href="#exportData">Export Data</a></li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -306,11 +309,12 @@
             <ul class="sidebar-nav">
                 <li class="sidebar-brand"><a href="#adminHome">Admin Dashboard</a></li>
                 <li><a href="#adminHome">Admin Home</a></li>
-                <li><a href="#adminHome">Services</a></li>
-                <li><a href="#adminHome">Contact</a></li>
+                <li><a href="#configureSurvey">Create New Test</a></li>
+                <li><a href="#manageTests">Manage Tests</a></li>
+                <li><a href="#exportData">Export Data</a></li>
             </ul>
         </div>
-        <!-- #sidebar-wrapper -->
+        <!-- /#sidebar-wrapper -->
     
         <div id="page-content-wrapper">
             <div class="container-fluid">
@@ -371,11 +375,12 @@
             <ul class="sidebar-nav">
                 <li class="sidebar-brand"><a href="#adminHome">Admin Dashboard</a></li>
                 <li><a href="#adminHome">Admin Home</a></li>
-                <li><a href="#adminHome">Services</a></li>
-                <li><a href="#adminHome">Contact</a></li>
+                <li><a href="#configureSurvey">Create New Test</a></li>
+                <li><a href="#manageTests">Manage Tests</a></li>
+                <li><a href="#exportData">Export Data</a></li>
             </ul>
         </div>
-        <!-- #sidebar-wrapper -->
+        <!-- /#sidebar-wrapper -->
 
         <div id="page-content-wrapper">
             <h1>New Survey</h1>
@@ -393,7 +398,7 @@
                     <input type="button" class="btn btn-primary btn-sm" id="answer" value="Add Answer" disabled="disabled">
                     </br>
                     </br>
-                     <input type="button" id="finish" value="Save">
+                     <input type="button" class="btn btn-primary" id="finish" value="Save">
                       
                     </br>
                 </p>
@@ -434,17 +439,18 @@
             <ul class="sidebar-nav">
                 <li class="sidebar-brand"><a href="#adminHome">Admin Dashboard</a></li>
                 <li><a href="#adminHome">Admin Home</a></li>
-                <li><a href="#adminHome">Services</a></li>
-                <li><a href="#adminHome">Contact</a></li>
+                <li><a href="#configureSurvey">Create New Test</a></li>
+                <li><a href="#manageTests">Manage Tests</a></li>
+                <li><a href="#exportData">Export Data</a></li>
             </ul>
         </div>
-        <!-- #sidebar-wrapper -->
+        <!-- /#sidebar-wrapper -->
   
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1>Preview</h1>
+                    <h2>The newly created test has been saved.<h2>
                     </div>
                 <div id="test">
                     <!-- grid goes here -->
@@ -496,22 +502,22 @@
         </div>
     </center>
 
-<!-- Modal -->
-<div class="modal fade" id="helpModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title" id="myModalLabel">Help</h3>
-      </div>
-      <div class="modal-body">
-        <p>In this section of the survey please answer the questions that are below. When finished please click next. </p>
-      </div>
-      <div class="modal-footer">
+    <!--Help Modal -->
+    <div class="modal fade" id="helpModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h3 class="modal-title" id="myModalLabel">Help</h3>
+          </div>
+          <div class="modal-body">
+            <p>In this section of the survey, please answer each of the questions presented. When finished, please click "Next". </p>
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
 </script>
 <!-- end take survey template -->
@@ -562,27 +568,27 @@
             <br>
             <br>
 			<div>
-				<button class ="btn btn-success" type="button" id="submit-selection" disabled>Submit</button>
+				<button class ="btn btn-primary" type="button" id="submit-selection" disabled>Submit</button>
 			</div>
         </div>
     </center>
 
-<!-- Modal -->
-<div class="modal fade" id="helpModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title" id="myModalLabel">Help</h3>
-      </div>
-      <div class="modal-body">
-        <p>In this section of the survey please use the buttons below to move the character to open seat of your choosing. After the character is over the seat please click the submit button.</p>
-      </div>
-      <div class="modal-footer">
+    <!-- Help Modal -->
+    <div class="modal fade" id="helpModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h3 class="modal-title" id="myModalLabel">Help</h3>
+          </div>
+          <div class="modal-body">
+            <p>In this section of the survey, please use the buttons below to move the character to the open seat of your choosing. After the character is over the seat you choose, please click the "Submit" button.</p>
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
 
 </script>

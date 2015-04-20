@@ -19,10 +19,10 @@ var ManageTestsView = function () {
                             
                     if (tests[x].activeFlag == "true")
                     {
-                        testHtml += "    <span class='label label-success'>ACTIVE</span>";
+                        testHtml += "        <span class='label label-success'>ACTIVE</span>";
                     } else 
                     {
-                        testHtml += "<span class='label label-default'>INACTIVE</span>"
+                        testHtml += "        <span class='label label-default'>INACTIVE</span>"
                     }
 
                     testHtml += "</div>";
@@ -39,8 +39,14 @@ var ManageTestsView = function () {
                         questionNum++;
                     }
 
-                    testHtml += "<button class='btn btn-primary activate-test' id='" 
-                                + tests[x]._id.$oid + "'>Activate This Test</button></div>";
+                    testHtml += "<div class='btn-toolbar'>";
+                    
+                    testHtml += "<button class='btn btn-success activate-test' id='activate-" 
+                                + tests[x]._id.$oid + "'>Activate This Test</button>";
+                    
+                    testHtml += "<button class='btn btn-danger delete-test' id='delete-" 
+                                + tests[x]._id.$oid + "'>Delete This Test</button>";
+                    testHtml += "</div>";
 
                     testDiv.innerHTML = testHtml;
                     document.getElementById("list-tests").appendChild(testDiv);
@@ -59,7 +65,14 @@ var ManageTestsView = function () {
         this.$el.on('click', '.activate-test',
             function(e) {
                 activateTest(e.target.id);
-            });
+            }
+        );
+
+        this.$el.on('click', '.delete-test',
+            function(e) {
+                deleteTest(e.target.id);
+            }
+        );
 
 		this.render();
 	};
@@ -72,10 +85,12 @@ var ManageTestsView = function () {
     this.initialize();
 }
 
-function activateTest(id)
+function activateTest(divId)
 {
     //alert("you clicked to activate test with id: " + id);
 
+    // divId has format "activate-[actual-id-here]", so we need to pull the actual id out. 
+    var id = divId.substring(9);
     // first, let's see if there are any active tests in db (there should be at most 1)
     getDocsWithQuery("wwystest", "tests_dev", JSON.stringify({"activeFlag":"true"}))
     .then(
@@ -121,4 +136,19 @@ function activateTest(id)
 
     );
 
+}
+
+function deleteTest(divId)
+{
+    // divId has format "delete-[actual-id-here]", so we need to pull the actual id out. 
+    var id = divId.substring(7);
+
+    // now, let's deactive the current active test
+    deleteDocById("wwystest", "tests_dev", id)
+    .then(
+        function() {
+            alert("successfully deleted test with id " + id + ".");
+            location.reload();
+        }
+    );
 }

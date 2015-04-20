@@ -137,6 +137,29 @@ function generateGrid( rows, cols, empChairArray, occChairArray) {
 	document.getElementById("up").addEventListener("click", function() {
 		moveAvatar('up');
 	});
+
+    $(document).keydown(function(e) {
+        switch(e.which) {
+            case 37: // left
+                moveAvatar('left');
+                break;
+
+            case 38: // up
+                moveAvatar('up');
+                break;
+
+            case 39: // right
+                moveAvatar('right');
+                break;
+
+            case 40: // down
+                moveAvatar('down');
+                break;
+
+            default: return; // exit this handler for other keys
+        }
+        e.preventDefault(); // prevent the default action (scroll / move caret)
+    });
 	
 	// Click listener for reset button
 	/*document.getElementById("reset").addEventListener("click", function() {

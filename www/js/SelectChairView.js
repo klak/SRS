@@ -71,7 +71,6 @@ function renderRoom(height, width, emptyChairs, occupiedChairs) {
     var counter = 0;
 
     var lastClicked;
-
     var grid = generateGrid(height, width, emptyChairs, occupiedChairs);
 
     $("#test-room").html(grid);
@@ -115,6 +114,7 @@ function generateGrid( rows, cols, empChairArray, occChairArray) {
             }
         }
     }
+
 	
 	//TODO: Figure out how to store entrance coords and load avatar starting on entrance
 	avatarCoords[0] = rows-1;

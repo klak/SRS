@@ -62,18 +62,20 @@ function populateQuestions(test, divName)
     var curAnswers = test.surveyQuestions.answerChoices[i];
 
     var questionDiv = document.createElement('div');
+    questionDiv.className = "form-group";
     questionDiv.id = "question" + (i+1);
-    questionDiv.innerHTML = "</br><p>(" + (i+1) + ") " + curQuestion + "</p>";
+    questionDiv.innerHTML = "</br>(" + (i+1) + ") " + curQuestion;
     document.getElementById(divName).appendChild(questionDiv);
 
     var answerDiv = document.createElement('div');
+    answerDiv.className = "input-group";
     answerDiv.id = "answer" + (i+1);
     var answerHtml = "";
     
     for (var x in curAnswers)
     {
-        answerHtml += "<input type='" + curTypes[x] + "' name='answer" + (i+1) + "' value='" 
-                  + curAnswers[x] + "'>" + curAnswers[x] + "</input></br>";
+        answerHtml += "<label class='" + curTypes[x] + " control-label'><input type='" + curTypes[x] + "' name='answer" + (i+1) + "' value='" 
+                  + curAnswers[x] + "'>" + curAnswers[x] + "</input></label>";
     }
 
     answerDiv.innerHTML = answerHtml;

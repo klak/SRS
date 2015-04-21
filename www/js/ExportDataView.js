@@ -154,6 +154,12 @@ function exportResultsByTestId()
     getDocsWithQuery("wwystest", "results_dev", JSON.stringify({"testId":testId}))
     .then(
         function(results) {
+            if (results.length < 1)
+            {
+                alert("There are no results matching the ID entered.", "No results found");
+                return;
+            }
+
             var csvContent = "testId,chairChoice,surveyAnswers\n";
             for (var x in results)
             {

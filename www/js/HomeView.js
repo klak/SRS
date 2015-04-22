@@ -27,12 +27,14 @@ var HomeView = function () {
 
         var un = document.myform.username.value;
         var pw = document.myform.pword.value;
-
+		
         console.log("entered username is: ", un);
         console.log("entered password is: ", pw);
-        var valid = false;
-
-        var unArray = ["Tester"];  // as many as you like - no comma after final entry
+		
+        var valid = login(un,pw);
+		console.log("valid: " + valid);
+		
+        /* var unArray = ["Tester"];  // as many as you like - no comma after final entry
         var pwArray = ["password"];  // the corresponding passwords;
 
         for (var i = 0; i < unArray.length; i++) {
@@ -40,7 +42,7 @@ var HomeView = function () {
                 valid = true;
                 break;
             }
-        }
+        } */
 
         if (valid) {
             window.location = "#adminHome";

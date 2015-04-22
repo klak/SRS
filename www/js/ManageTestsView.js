@@ -107,7 +107,7 @@ function activateTest(divId)
                 updateDocById("wwystest", "tests_dev", id, {"activeFlag":"true"})
                 .then(
                     function() {
-                        alert("test with id " + id + " activated successfully.");
+                        alert("Test with ID " + id + " activated successfully.");
                     }
                 ); 
             }
@@ -120,7 +120,7 @@ function activateTest(divId)
             updateDocById("wwystest", "tests_dev", activeId, {"activeFlag":"false"})
             .then(
                 function() {
-                    console.log("successfully de-activated old active test.");
+                    console.log("Successfully de-activated old active test.");
 
                     // and now update the test to be activated.
                     updateDocById("wwystest", "tests_dev", id, {"activeFlag":"true"})
@@ -147,7 +147,7 @@ function deleteTest(divId)
     deleteDocById("wwystest", "tests_dev", id)
     .then(
         function() {
-            alert("successfully deleted test with id " + id + ".");
+            alert("Successfully deleted test with ID " + id + ".");
             location.reload();
         }
     );

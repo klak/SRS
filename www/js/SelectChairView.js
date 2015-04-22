@@ -171,7 +171,7 @@ function generateGrid( rows, cols, empChairArray, occChairArray) {
 
 function verifySelection(row, col, id)
 {
-    alert("you selected seat with id " + id);
+    alert("You have selected seat " + id);
     // TODO: this should actually ask "are you sure?" or something, and
     // go back if the user says no.
 }

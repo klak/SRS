@@ -27,6 +27,12 @@ var TakeSurveyView = function() {
         getDocsWithQuery("wwystest", "tests_dev", JSON.stringify({"activeFlag":"true"})).
             then(
                 function(tests) {
+                    if (tests.length < 1)
+                    {
+                        alert("There is not active test in the database. Please alert a test administrator.");
+                        window.location = "#home";
+                    }
+
                     var activeTest = tests[0];
                     //console.log("num tests:" + tests.length);
                     //console.log("test:" + JSON.stringify(activeTest));

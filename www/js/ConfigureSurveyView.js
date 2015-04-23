@@ -28,7 +28,7 @@ var ConfigureSurveyView = function () {
       this.$el.on('click', '#question', 
           function ()
           {
-              addAllInputsHelper('dynamicInputs', 'text', true);
+              addAllInputsHelper('dynamicInputs', true);
           }
       );
 
@@ -51,6 +51,13 @@ var ConfigureSurveyView = function () {
           function ()
           {
               removeAnswerChoice($(this));
+          }
+      );
+
+      this.$el.on('click', "a[name='removeQ']", 
+          function ()
+          {
+              removeQuestion($(this));
           }
       );
 
@@ -110,6 +117,54 @@ function removeAnswerChoice(removeButton) // passed the remove button for the an
         // remove item answerNum from tempAnswerTypes
         tempAnswerTypes.splice(answerNum, 1);
         countAnswers--;
+        console.log("removing from latest question answer option " + answerNum);
+    } else // if this is not the latest question, we have to adjust a bunch of things
+    {
+        console.log("removing from question num " + questionNum + " answer number " + answerNum);
+
+        // remove item answerNum from answerTypes[questionNum-1]
+        console.log("answertypes array at questNum-1 was:    " + answerTypesArray[questionNum]);
+        answerTypesArray[questionNum].splice(answerNum, 1);
+        console.log("answertypes array at questNum-1 is now: " + answerTypesArray[questionNum]);
+
+        // reset id's of later answer choices -- lower the answer numbers in the id's
+        for (var i = answerNum+1; i <= numberArr[questionNum-1] - 1; i++)
+        {
+            console.log("going to reset id q" + questionNum + "a" + i);
+            var newAnswerNum = i - 1;
+            console.log("to q" + questionNum + "a" + newAnswerNum);
+
+            // update id for both answer div itself and the remove button!
+            var oldId = "q" + questionNum + "a" + i;
+            var newId = "q" + questionNum + "a" + newAnswerNum;
+            var answerDiv = document.getElementById(oldId);
+            answerDiv.id = newId;
+
+            var oldRemBtn = document.getElementById("remove-" + oldId);
+            oldRemBtn.id = "remove-" + newId; 
+        }
+
+        numberArr[questionNum-1]--; 
+    }
+
+    // finally, remove the visible answer div itself
+    $(removeButton).parent('div').remove();
+
+}
+
+function removeQuestion(removeButton) // passed the remove button for the answer to remove
+{
+    var btnId = $(removeButton).attr("id");
+    console.log(btnId);
+
+    var questionNum = parseInt(btnId.substring(8,9));
+    var answerNum = parseInt(btnId.substring(10,11));
+
+    if (questionNum == counterQuestion) // we are on the latest question
+    {
+        // remove item answerNum from tempAnswerTypes
+        tempAnswerTypes.splice(answerNum, 1);
+        countAnswers--;
         console.log("removing from latest question answer option " + answerNum)
     } else // if this is not the latest question, we have to adjust a bunch of things
     {
@@ -145,6 +200,7 @@ function removeAnswerChoice(removeButton) // passed the remove button for the an
 
 }
 
+
 function newAnswerHelper() {
     addAllInputs("dynamicInputs", inputType, false);
 }
@@ -177,7 +233,8 @@ function addAllInputs(divName, inputType, questionBool) {
           if (firstQuest == true || answerBool == true) {
               var htmlString = "<hr><div class='input-group'>" 
               htmlString += "<div class='input-group-addon'>" + (counterQuestion+ 1) + "</div>"
-              htmlString += "<input id='newDiv" + counterQuestion + "' class='form-control' type='text' name='myInputs[]' placeholder='Question " + (counterQuestion+1) + "'></div>";
+              htmlString += "<input id='newDiv" + counterQuestion + "' class='form-control' type='text' name='myInputs[]' placeholder='Question " + (counterQuestion+1) + "'><div id='remove" + counterQuestion + "q" 
+              + "' class='btn-remove input-group-addon' name='removeQ'><span class='glyphicon glyphicon-remove'></span></div></div>";
               console.log(htmlString);
 
               newdiv.innerHTML = htmlString;
@@ -201,7 +258,7 @@ function addAllInputs(divName, inputType, questionBool) {
                 newdiv.innerHTML = "<div class='input-group'>" + "<input class='form-control' type='text' id='q" 
                 + counterQuestion + "a" + countAnswers + "' placeholder='Answer " + (countAnswers+1) + "'>"
                 + "<div id='remove-q" + counterQuestion + "a" + countAnswers 
-                + "' class='btn-remove input-group-addon'>" 
+                + "' class='btn-remove input-group-addon' name='removeA'>" 
                 + "<span class='glyphicon glyphicon-remove'></span></div></div>";
 
                 tempAnswerTypes[tempAnswerTypes.length] = "text";
@@ -211,7 +268,7 @@ function addAllInputs(divName, inputType, questionBool) {
             case 'radio':
                 newdiv.innerHTML = "<div class='input-group'>" + "<div class='input-group-addon'><input class='radio-inline' type='radio'></div>" 
                 + "<input class='form-control text-inline' type='text' id='q" + counterQuestion + "a" + countAnswers + "' placeholder='Answer" + (countAnswers+1) +"'><div id='remove-q" 
-                + counterQuestion + "a" + countAnswers + "' class='btn-remove input-group-addon'>" 
+                + counterQuestion + "a" + countAnswers + "' class='btn-remove input-group-addon' name='removeA'>" 
                 + "<span class='glyphicon glyphicon-remove'>" +"</span></div></div>";
 
                 tempAnswerTypes[tempAnswerTypes.length] = "radio";
@@ -221,18 +278,18 @@ function addAllInputs(divName, inputType, questionBool) {
             case 'checkbox':
                 newdiv.innerHTML = "<div class='input-group'>" + "<div class='input-group-addon'><input class='checkbox-inline' type='checkbox'></div>" 
                 + "<input class='form-control text-inline' type='text' id='q" + counterQuestion + "a" + countAnswers + "' placeholder='Answer" + (countAnswers+1) +"'><div id='remove-q" 
-                + counterQuestion + "a" + countAnswers + "' class='btn-remove input-group-addon'>" 
+                + counterQuestion + "a" + countAnswers + "' class='btn-remove input-group-addon' name='removeA'>" 
                 + "<span class='glyphicon glyphicon-remove'>" +"</span></div></div>";
 
                 tempAnswerTypes[tempAnswerTypes.length] = "checkbox";
                 countAnswers++;
                 break;
-                
+
             case 'textarea':
                 newdiv.innerHTML = "<div class='input-group'>" + "<input class='form-control' type='textarea' id='q" 
                 + counterQuestion + "a" + countAnswers + "' placeholder='Answer " + (countAnswers+1) + "'>"
                 + "<div id='remove-q" + counterQuestion + "a" + countAnswers 
-                + "' class='btn-remove input-group-addon'>" 
+                + "' class='btn-remove input-group-addon' name='removeA'>" 
                 + "<span class='glyphicon glyphicon-remove'></span></div></div>";
                 tempAnswerTypes[tempAnswerTypes.length] = "textarea";
                 countAnswers++;

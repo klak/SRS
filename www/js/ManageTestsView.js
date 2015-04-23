@@ -7,8 +7,10 @@ var ManageTestsView = function () {
         getAllDocuments("wwystest", "tests_dev")
         .then(
             function(tests) {
+                console.log("iterating through tests to populate manage tests page");
                 for (var x in tests)
                 {
+
                     var testDiv = document.createElement('div');
                     //testDiv.id = tests[x]._id.$oid;
                     testDiv.className = "panel panel-default";
@@ -50,6 +52,7 @@ var ManageTestsView = function () {
 
                     testDiv.innerHTML = testHtml;
                     document.getElementById("list-tests").appendChild(testDiv);
+
                 }
             }
         );

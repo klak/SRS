@@ -1,3 +1,2 @@
 # SRS
 Implementation of Dr. Scofields Cordova App
-Making myself a contributor...

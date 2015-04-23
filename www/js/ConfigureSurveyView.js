@@ -35,7 +35,8 @@ var ConfigureSurveyView = function () {
       this.$el.on('click', '#answer', 
           function()
           {
-              addAllInputs('dynamicInputs', document.myForm.inputSelect.value, false);
+              //addAllInputs('dynamicInputs', document.myForm.inputSelect.value, false);
+              newAnswerHelper();
           }
       );
 
@@ -155,8 +156,8 @@ function newAnswerHelper() {
   The temporary array added to the answerTypesArray[].
   The temporary array is then emptied.
 */
-function addAllInputsHelper(divName, inputType, questionBool){
-    inputType = selectInputType(inputType);
+function addAllInputsHelper(divName, questionBool){
+    var inputType = selectInputType(inputType);
     addAllInputs(divName, inputType, questionBool);
     answerTypesArray[answerTypesArray.length] = tempAnswerTypes;
     //console.log(answerTypesArray);
@@ -176,8 +177,7 @@ function addAllInputs(divName, inputType, questionBool) {
           if (firstQuest == true || answerBool == true) {
               var htmlString = "<hr><div class='input-group'>" 
               htmlString += "<div class='input-group-addon'>" + (counterQuestion+ 1) + "</div>"
-              htmlString += "<input id='newDiv" 
-              + counterQuestion + "' class='form-control' type='text' name='myInputs[]' placeholder='Question " + (counterQuestion+1) + "'></div>";
+              htmlString += "<input id='newDiv" + counterQuestion + "' class='form-control' type='text' name='myInputs[]' placeholder='Question " + (counterQuestion+1) + "'></div>";
               console.log(htmlString);
 
               newdiv.innerHTML = htmlString;
@@ -190,10 +190,12 @@ function addAllInputs(divName, inputType, questionBool) {
               countAnswers = 0;
               firstQuest = false;
               answerBool = false;
-          } else { // Sends an alert if a question is tried to be made and doesn't have an answer option
+          } 
+          else { // Sends an alert if a question is tried to be made and doesn't have an answer option
               alert("Please add at least one answer choice to the question.");
           }
-    } else {
+    } 
+    else {
         switch(inputType) {
             case 'text':
                 newdiv.innerHTML = "<div class='input-group'>" + "<input class='form-control' type='text' id='q" 
@@ -202,10 +204,10 @@ function addAllInputs(divName, inputType, questionBool) {
                 + "' class='btn-remove input-group-addon'>" 
                 + "<span class='glyphicon glyphicon-remove'></span></div></div>";
 
-
                 tempAnswerTypes[tempAnswerTypes.length] = "text";
                 countAnswers++;
                 break;
+
             case 'radio':
                 newdiv.innerHTML = "<div class='input-group'>" + "<div class='input-group-addon'><input class='radio-inline' type='radio'></div>" 
                 + "<input class='form-control text-inline' type='text' id='q" + counterQuestion + "a" + countAnswers + "' placeholder='Answer" + (countAnswers+1) +"'><div id='remove-q" 
@@ -215,6 +217,7 @@ function addAllInputs(divName, inputType, questionBool) {
                 tempAnswerTypes[tempAnswerTypes.length] = "radio";
                 countAnswers++;
                 break;
+
             case 'checkbox':
                 newdiv.innerHTML = "<div class='input-group'>" + "<div class='input-group-addon'><input class='checkbox-inline' type='checkbox'></div>" 
                 + "<input class='form-control text-inline' type='text' id='q" + counterQuestion + "a" + countAnswers + "' placeholder='Answer" + (countAnswers+1) +"'><div id='remove-q" 
@@ -224,6 +227,7 @@ function addAllInputs(divName, inputType, questionBool) {
                 tempAnswerTypes[tempAnswerTypes.length] = "checkbox";
                 countAnswers++;
                 break;
+                
             case 'textarea':
                 newdiv.innerHTML = "<div class='input-group'>" + "<input class='form-control' type='textarea' id='q" 
                 + counterQuestion + "a" + countAnswers + "' placeholder='Answer " + (countAnswers+1) + "'>"
